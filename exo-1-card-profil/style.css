@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* font-family: "Open Sans", sans-serif; */
+}
+.profile {
+  position: relative;
+}
+
+.profile img {
+  width: 250px;
+  position: absolute;
+  top: -10%;
+  left: 1px;
+  animation: img 5s infinite linear;
+}
+
+.profile .name {
+  line-height: 10px;
+}
+
+.profile .name h1 {
+  font-weight: 800;
+}
+
+.content div .avatar-cadre {
+  width: 250px;
+  height: 30vh;
+  border: 20px solid blue;
+  margin-left: 20%;
+  margin-top: 20%;
+}
+
+.profile h1,
+.profile p {
+  margin-left: 50px;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+}
+
+main .lorem p {
+  width: 50rem;
+  text-align: justify;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: -3px;
+}
+
+.lorem span {
+  color: blue;
+  text-decoration: underline;
+}
+
+.nav-1,
+.nav-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-1 a,
+.nav-2 a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 800;
+  font-size: 28px;
+}
+.nav-2 {
+  gap: 120px;
+  transform: translateY(80px);
+}
+
+.nav-2 a {
+  transform: rotate(-90deg);
+  font-size: 20px;
+  color: #888;
+}
+
+.nav-2 a:nth-child(2) {
+  color: #000;
+}
+
+.nav-1 a:first-child {
+  color: blue;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 3%;
+  align-items: center;
+}
+
+footer .icons {
+  display: flex;
+  justify-self: flex-end;
+  gap: 125px;
+  margin-left: 6%;
+  color: blue;
+  flex-wrap: wrap;
+}
+
+footer .icons i {
+  font-size: 35px;
+}
+
+/* @keyframes img {
+  0% {
+    transform: translateX(50px);
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: translateY(50px);
+    transform: rotate(360deg);
+  }
+} */

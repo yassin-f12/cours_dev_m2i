@@ -16,6 +16,5 @@ jobs:
       - name: Vérifier les fichiers
         run: |
           test -f bash-linux/index.html
-          test -f bash-linux/script.js
+          test -f bash-linux/js/script.js
           echo "Les fichiers existent !"
-

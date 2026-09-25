@@ -43,16 +43,94 @@
 
 - sudo apt install tree -y
 - tree : tree projects/ -> verifie le resultat, sa affiche tout l'arborecance du dossier
+- tree -L 1 :
 
 # Permissions
 
 - ls -l deploy.sh
 - chmod +x deploy.sh : renre un script executable
-- chmod 644 index.html
+- chmod 644 index.html : Limiter la profondeur
+- chmod 755 /var/www/mon-site/ : Permissions classiques pour un repertoire web
+- tree -d : N'afficher que les repertoires
+
+# apt
+
+- sudo apt update : Mettre a jour la liste des paquets disponibles
+- sudo apt upgrade -y : Mettre a jour les paquets installes
+- apt search nginx : Chercher un paquet
+- sudo apt install nginx -y : Installer un paquet
+- apt show nginx : Voir les infos d'un paquet
+- sudo apt remove nginx -y : Supprimer un paquet
+- sudo apt purge nginx -y : Supprimer un paquet et ses fichiers de configuration
 
 # firewall avec UFW
 
-- sudo apt install ufw -y
-- sudo ufw default deny incoming : refuser les connexions qui arrivent vers ton PC.
-- sudo ufw allow 22/tcp : Autorise les connexions TCP sur le port 22.
+- sudo apt install ufw -y : Installer et activer UFW
+- sudo ufw default deny incoming et sudo ufw default allow outgoing : refuser les connexions qui arrivent vers ton PC.
+- sudo ufw allow 22/tcp : Autoriser SSH (sinon on se coupe l'acces au serveur)
 - sudo ufw enable : Active réellement le pare-feu.
+
+# Verifier le statut
+
+- sudo ufw status verbose
+
+# Autoriser HTTP et HTTPS (pour le serveur web)
+
+- sudo ufw allow 80/tcp
+- sudo ufw allow 443/tcp
+
+# nginx
+
+- sudo systemctl start nginx
+- sudo systemctl stop nginx
+
+# NE JAMAIS TRAVAILLER EN ROOT
+
+- ssh root@serveur # Non
+- sudo su # A eviter au maximum
+
+# BONNE PRATIQUE : utiliser un utilisateur normal avec sudo
+
+- ssh deployer@serveur # Oui
+- sudo systemctl restart nginx # Oui, commande par commande
+
+# Voir les droits sudo de l'utilisateur courant
+
+- sudo -l
+
+# Verifier que l'utilisateur est dans le groupe sudo
+
+- groups
+
+# Installer le paquet de mises a jour automatiques
+
+- sudo apt install unattended-upgrades -y
+
+# Activer les mises a jour de securite automatiques
+
+- sudo dpkg-reconfigure -plow unattended-upgrades
+
+# Repondre "Yes"
+
+# cheklist secruiter deploiment
+
+- Obligatoire :
+
+- [x] utilisateur non-root avec sudo
+- [x] cle ssh configuree
+- [ ] mdp ssh desactiver
+- [ ] PermitRootLogin no
+- [x] Firewall actif (ufw)
+- [x] seuls ports 22, 80, 443 ouverts
+- [x] mise a jour auto actives
+- [ ] HTPPS configurer (Let's Encrypt)
+- [ ] permissions fichiers web correctes
+
+- Recommander :
+
+- [ ] fail2ban installe
+- [ ] Logs centralises et surveilles
+- [ ] backups auto et tests
+- [ ] headers de securiter HTTP configures
+- [ ] pas de fichiers sensibles dans /var/www (.env, .git)
+- [ ] utilisateur dedie au deploiement

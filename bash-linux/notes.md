@@ -108,9 +108,7 @@
 
 # Activer les mises a jour de securite automatiques
 
-- sudo dpkg-reconfigure -plow unattended-upgrades
-
-# Repondre "Yes"
+- sudo dpkg-reconfigure -plow unattended-upgrades - Repondre "Yes"
 
 # cheklist secruiter deploiment
 

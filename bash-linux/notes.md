@@ -110,6 +110,14 @@
 
 - sudo dpkg-reconfigure -plow unattended-upgrades - Repondre "Yes"
 
+# Liste les configs Nginx
+
+- ls /etc/nginx/sites-available/ puis ls /etc/nginx/sites-enabled/
+- sudo cat /etc/nginx/sites-available/exoBash (exoBash le nom de repertoire la)
+- sudo nginx -t ; verifie si tout est ok
+- sudo systemctl reload nginx : relaod le serveur
+- sudo tail -f /var/log/nginx/error.log : voir les erreurs logs
+
 # cheklist secruiter deploiment
 
 - Obligatoire :
@@ -132,3 +140,12 @@
 - [ ] headers de securiter HTTP configures
 - [ ] pas de fichiers sensibles dans /var/www (.env, .git)
 - [ ] utilisateur dedie au deploiement
+
+# Nginx = receptionniste a qui le client parle, le client ne parle pas directement au serveur (reverse proxy car il communique avec le serveur, il est de son coté, un proxy simple et lui du coté du client) -> il recoit par exemple api/user, il regarde ta config et vois que tout ce qui commence par api/ doit aller a :3000 par exemple (ton api node pour cette exo), et donc ce receptionniste peut avoir plusieures boutiques, donc tu peut config plusieurs api (ex: :4000, :5000) ect . Nginx peut peut servir de barrière supplémentaire :
+
+- **HTTPS/TLS : Nginx peut gérer les certificats et chiffrer les communications.**
+- **Masquer le serveur backend : l'utilisateur voit Nginx, pas directement ton application.**
+- **Limiter les requêtes : rate limiting contre certains abus.**
+- **Bloquer certaines requêtes/IP.**
+- **Authentification avant d'autoriser l'accès au backend.**
+- **Peut être placé devant plusieurs applications et contrôler ce qui entre.**

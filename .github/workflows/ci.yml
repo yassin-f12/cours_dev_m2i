@@ -24,6 +24,9 @@ jobs:
       - name: Vérifier les conteneurs
         run: docker compose -f cours_docker/docker-compose.yml ps
 
+      - name: Voir les logs
+        run: docker compose -f cours_docker/docker-compose.yml logs
+
       - name: Tester l'application
         run: curl http://localhost:3000/health
 

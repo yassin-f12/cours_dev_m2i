@@ -14,7 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Démarrer Docker
-        run: docker compose up -d --build
+        run: docker compose -f cours_docker/docker-compose.yml up -d --build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Vérifier les conteneurs
         run: docker compose ps
@@ -24,7 +29,7 @@ jobs:
 
       - name: Arrêter Docker
         if: always()
-        run: docker compose down
+        run: docker compose -f cours_docker/docker-compose.yml down
 
       - name: Vérifier les fichiers
         run: |

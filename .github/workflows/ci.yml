@@ -13,6 +13,19 @@ jobs:
       - name: Récupérer le projet
         uses: actions/checkout@v4
 
+      - name: Démarrer Docker
+        run: docker compose up -d --build
+
+      - name: Vérifier les conteneurs
+        run: docker compose ps
+
+      - name: Tester l'application
+        run: curl http://localhost:3000/health
+
+      - name: Arrêter Docker
+        if: always()
+        run: docker compose down
+
       - name: Vérifier les fichiers
         run: |
           test -f bash-linux/index.html

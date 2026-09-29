@@ -29,7 +29,7 @@ jobs:
         run: docker compose -f cours_docker/docker-compose.yml logs
 
       - name: Tester l'application
-        run: curl -v http://localhost:3000/health
+        run: curl -v http://127.0.0.1:3000/health
 
       - name: Logs après le test
         if: always()

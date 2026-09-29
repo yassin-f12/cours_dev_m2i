@@ -29,7 +29,17 @@ jobs:
         run: docker compose -f cours_docker/docker-compose.yml logs
 
       - name: Tester l'application
-        run: curl -v http://127.0.0.1:3000/health
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/health; then
+              exit 0
+            fi
+            echo "App pas prête, tentative $i/30..."
+            sleep 2
+          done
+          echo "L'app n'a jamais répondu"
+          docker compose -f cours_docker/docker-compose.yml logs app
+          exit 1
 
       - name: Logs après le test
         if: always()

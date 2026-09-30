@@ -94,17 +94,9 @@ DEBUT
     ECRIRE("Obesite")
 FIN
 
-
-Objectifs : Probleme concret multi-etapes, decomposition en sous-calculs, arrondi superieur.
-Un peintre veut un programme de devis. Regles :
-Surface des murs = perimetre × hauteur (4 murs, sans sol ni plafond)
-Retirer 20% pour portes/fenetres
-1 pot de peinture couvre 10 m²
-Nombre de pots arrondi au superieur
-1 pot coute 29.90 €
-Le programme demande longueur, largeur et hauteur, puis affiche la surface nette, le nombre de pots et
-le prix total.
-Question : Quelle fonction JS pour l'arrondi superieur ? Pourquoi pas Math.round() ?
+Objectifs : Division entiere et modulo, decomposition en sous-etapes.
+Ecrire un programme qui convertit un nombre de secondes en heures, minutes et secondes (Xh Ym Zs).
+Question : Comment faire une division entiere en JavaScript ?
 
 */
 
@@ -241,9 +233,24 @@ public class Tp {
         sc.close();
     }
 
+    public static void exo6() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("seconds :");
+        int sec = sc.nextInt();
+
+        int restHeure = sec / 3600; //1
+        int moduHeure = sec % 3600; //1400
+        int min = moduHeure / 60; //23
+        int moduMin = moduHeure % 60; //20
+
+
+        System.out.println(restHeure +"h " + min + "m " + moduMin + "s");
+    }
+
 
     public static void main(String[] args) {
-        exo5();
+        exo6();
     }
 }
 

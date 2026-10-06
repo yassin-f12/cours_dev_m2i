@@ -9,9 +9,73 @@
    ========================================================================== */
 
 /* 1. Boutons */
+.btn {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--weight-semibold);
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
 
 /* 2. Badges de statut */
+.badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  border-radius: var(--radius-full);
+}
 
 /* 3. Cartes */
+.card {
+  padding: var(--space-5);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
 
 /* 4. Alertes */
+.alert {
+  padding: var(--space-4);
+  color: var(--color-info-text);
+  background-color: var(--color-info-soft);
+  border: 1px solid var(--color-info-soft);
+  border-radius: var(--radius);
+}
+
+.color-swatch {
+  height: 50px;
+  border-radius: var(--radius);
+}
+
+.color-primary {
+  background-color: var(--color-primary);
+}
+
+.color-primary-hover {
+  background-color: var(--color-primary-hover);
+}
+
+.color-primary-soft {
+  background-color: var(--color-primary-soft);
+}
+
+.color-focus {
+  background-color: var(--color-focus);
+}

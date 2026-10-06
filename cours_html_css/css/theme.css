@@ -23,3 +23,12 @@
   --radius: 4px;
 }
 */
+
+:root {
+  --color-primary: #474f17;
+  --color-primary-hover: #343a11;
+  --color-primary-soft: #f1f3df;
+  --color-focus: #68751f;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --radius: 4px;
+}

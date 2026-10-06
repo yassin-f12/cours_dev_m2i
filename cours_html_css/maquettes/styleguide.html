@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guide de style - TechCorp RH</title>
+    <meta
+      name="description"
+      content="Guide de style du design system TechCorp RH."
+    />
+
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <style>
+      .swatch {
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        margin: 5px;
+        border: 1px solid var(--color-border);
+      }
+
+      .space {
+        height: 10px;
+        background-color: var(--color-primary);
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1>Design system TechCorp RH</h1>
+
+      <section aria-labelledby="couleurs">
+        <h2 id="couleurs">Couleurs</h2>
+
+        <div class="swatch" style="background: var(--color-primary)"></div>
+        <div
+          class="swatch"
+          style="background: var(--color-primary-hover)"
+        ></div>
+        <div class="swatch" style="background: var(--color-primary-soft)"></div>
+        <div class="swatch" style="background: var(--color-success)"></div>
+        <div class="swatch" style="background: var(--color-warning)"></div>
+        <div class="swatch" style="background: var(--color-danger)"></div>
+      </section>
+
+      <section aria-labelledby="typographie">
+        <h2 id="typographie">Typographie</h2>
+
+        <p style="font-size: var(--text-xs)">text-xs</p>
+        <p style="font-size: var(--text-sm)">text-sm</p>
+        <p style="font-size: var(--text-base)">text-base</p>
+        <p style="font-size: var(--text-lg)">text-lg</p>
+        <p style="font-size: var(--text-xl)">text-xl</p>
+        <p style="font-size: var(--text-2xl)">text-2xl</p>
+        <p style="font-size: var(--text-3xl)">text-3xl</p>
+      </section>
+
+      <section aria-labelledby="espacements">
+        <h2 id="espacements">Espacements</h2>
+
+        <div class="space" style="width: var(--space-1)"></div>
+        <div class="space" style="width: var(--space-2)"></div>
+        <div class="space" style="width: var(--space-3)"></div>
+        <div class="space" style="width: var(--space-4)"></div>
+        <div class="space" style="width: var(--space-5)"></div>
+        <div class="space" style="width: var(--space-6)"></div>
+        <div class="space" style="width: var(--space-7)"></div>
+        <div class="space" style="width: var(--space-8)"></div>
+      </section>
+
+      <section aria-labelledby="boutons">
+        <h2 id="boutons">Boutons</h2>
+
+        <button class="btn btn--primary">Principal</button>
+        <button class="btn btn--secondary">Secondaire</button>
+        <button class="btn btn--danger">Danger</button>
+        <button class="btn btn--ghost">Ghost</button>
+        <button class="btn btn--primary btn--sm">Petit</button>
+        <button class="btn btn--primary" disabled>Désactivé</button>
+      </section>
+    </main>
+  </body>
+</html>

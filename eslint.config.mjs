@@ -8,7 +8,12 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: { globals: globals.node },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
   },
   { files: ["**/*.js"], languageOptions: { sourceType: "module" } },
   {
@@ -16,5 +21,8 @@ export default defineConfig([
     plugins: { css },
     language: "css/css",
     extends: ["css/recommended"],
+    rules: {
+      "css/no-important": "off",
+    },
   },
 ]);

@@ -23,6 +23,12 @@ export default defineConfig([
     extends: ["css/recommended"],
     rules: {
       "css/no-important": "off",
+      "css/no-invalid-properties": [
+        2,
+        {
+          allowUnknownVariables: true,
+        },
+      ],
     },
   },
 ]);

@@ -12,6 +12,7 @@
 
 html {
   font-family: var(--font-sans);
+  font-size: 100%;
   color: var(--color-text);
   background-color: var(--color-bg);
 }
@@ -26,30 +27,34 @@ h2,
 h3,
 h4 {
   line-height: var(--leading-tight);
+  font-weight: var(--weight-semibold);
 }
 
 h1 {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-bold);
+  font-size: var(--text-2xl);
 }
 
 h2 {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
 }
 
 h3 {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
+  font-size: var(--text-lg);
 }
 
 h4 {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+}
+
+@media (min-width: 64em) {
+  h1 {
+    font-size: var(--text-3xl);
+  }
 }
 
 a {
   color: var(--color-primary);
+  text-underline-offset: 0.2em;
 }
 
 a:hover {

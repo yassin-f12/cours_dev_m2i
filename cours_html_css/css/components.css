@@ -193,7 +193,7 @@
   font-weight: var(--weight-semibold);
 }
 
-/*Connexion*/
+/*4. Connexion*/
 .form {
   display: grid;
   gap: var(--space-5);
@@ -222,4 +222,139 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+}
+
+/* 5. Coquille applicative */
+.topbar {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.topbar__menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin-right: var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.nav__icon {
+  width: var(--space-6);
+  height: var(--space-6);
+}
+
+.topbar__actions {
+  margin-left: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.brand__logo {
+  display: block;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.user__info p {
+  margin: 0;
+}
+
+.user__name {
+  font-weight: var(--weight-semibold);
+}
+
+.user__role {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.sidebar {
+  padding: var(--space-5) var(--space-4);
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.nav__heading {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+}
+
+.nav {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  background-color: var(--color-surface-muted);
+}
+
+.nav__link[aria-current="page"] {
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  font-weight: var(--weight-semibold);
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (min-width: 64em) {
+  .topbar__menu {
+    display: none;
+  }
 }

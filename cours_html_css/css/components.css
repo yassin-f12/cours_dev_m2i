@@ -167,8 +167,8 @@
 
 .alert--info {
   color: var(--color-info-text);
-  background-color: var(--color-info-subtle);
-  border-color: var(--color-info);
+  background-color: var(--color-info-soft);
+  border-color: var(--color-text);
 }
 
 .alert--success {

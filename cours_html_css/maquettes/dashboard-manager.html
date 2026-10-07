@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Vue d'équipe - TechCorp RH</title>
+    <meta name="description" content="Vue d'équipe du manager Karim Benali" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
+    <div class="app">
+      <header class="app__header topbar">
+        <button
+          class="topbar__menu"
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
+          <svg
+            class="nav__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span class="sr-only">Ouvrir le menu</span>
+        </button>
+
+        <a class="brand" href="dashboard-manager.html">
+          <img
+            class="brand__logo"
+            src="../assets/logo.svg"
+            alt=""
+            width="32"
+            height="32"
+          />
+          TechCorp RH
+        </a>
+
+        <div class="topbar__actions">
+          <div class="user">
+            <span class="avatar" aria-hidden="true">KB</span>
+            <div class="user__info">
+              <p class="user__name">Karim Benali</p>
+              <p class="user__role">Manager, Pôle Web</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <nav
+        class="app__sidebar sidebar"
+        id="navigation"
+        aria-label="Navigation principale"
+      >
+        <h2 class="nav__heading" id="nav-perso">Mon espace</h2>
+
+        <ul class="nav" role="list" aria-labelledby="nav-perso">
+          <li>
+            <a class="nav__link" href="dashboard-employe.html">
+              Tableau de bord
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="conges-demande.html"> Mes congés </a>
+          </li>
+          <li>
+            <a class="nav__link" href="note-frais-nouvelle.html">
+              Notes de frais
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="materiel.html"> Matériel </a>
+          </li>
+          <li>
+            <a class="nav__link" href="profil.html"> Mon profil </a>
+          </li>
+        </ul>
+
+        <h2 class="nav__heading" id="nav-equipe">Mon équipe</h2>
+
+        <ul class="nav" role="list" aria-labelledby="nav-equipe">
+          <li>
+            <a
+              class="nav__link"
+              href="dashboard-manager.html"
+              aria-current="page"
+            >
+              Vue d'équipe
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="demandes.html">
+              Demandes à traiter
+              <span class="badge">5</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="planning-equipe.html">
+              Planning d'équipe
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="app__main" id="contenu" tabindex="-1">
+        <div class="container">
+          <header class="page-header">
+            <div>
+              <h1>Vue d'équipe</h1>
+              <p class="page-header__subtitle">Pôle Web, 8 collaborateurs</p>
+            </div>
+
+            <div class="page-header__actions">
+              <a class="btn btn--secondary" href="planning-equipe.html">
+                Voir le planning
+              </a>
+
+              <a class="btn btn--primary" href="demandes.html">
+                Traiter les demandes
+              </a>
+            </div>
+          </header>
+
+          <div class="alert alert--warning" role="alert">
+            Risque de sous-effectif du 26 au 30 octobre.
+          </div>
+
+          <section aria-labelledby="indicateurs-title">
+            <h2 class="sr-only" id="indicateurs-title">
+              Indicateurs de l'équipe
+            </h2>
+
+            <ul class="grid-auto" role="list">
+              <li class="card stat">
+                <span class="stat__label">Congés à valider</span>
+                <p class="stat__value">5</p>
+              </li>
+
+              <li class="card stat">
+                <span class="stat__label">Notes de frais à valider</span>
+                <p class="stat__value">3</p>
+                <span class="stat__label">412,30 €</span>
+              </li>
+
+              <li class="card stat">
+                <span class="stat__label">Absents aujourd'hui</span>
+                <p class="stat__value">2 sur 8</p>
+              </li>
+            </ul>
+          </section>
+
+          <div class="grid-split">
+            <section class="card" aria-labelledby="demandes-title">
+              <div class="card__header">
+                <h2 class="card__title" id="demandes-title">
+                  Dernières demandes en attente
+                </h2>
+              </div>
+
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Collaborateur</th>
+                      <th scope="col">Demande</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>Claire Martin</td>
+                      <td>Congés payés</td>
+                      <td>
+                        <time datetime="2026-10-26">26/10/2026</time>
+                      </td>
+                      <td>
+                        <a
+                          class="btn btn--ghost btn--sm"
+                          href="demande-detail.html"
+                        >
+                          Examiner
+                          <span class="sr-only">
+                            la demande de Claire Martin
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Amina Nasri</td>
+                      <td>Congés payés</td>
+                      <td>
+                        <time datetime="2026-11-02">02/11/2026</time>
+                      </td>
+                      <td>
+                        <a
+                          class="btn btn--ghost btn--sm"
+                          href="demande-detail.html"
+                        >
+                          Examiner
+                          <span class="sr-only">
+                            la demande d'Amina Nasri
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Thomas Roux</td>
+                      <td>RTT</td>
+                      <td>
+                        <time datetime="2026-10-30">30/10/2026</time>
+                      </td>
+                      <td>
+                        <a
+                          class="btn btn--ghost btn--sm"
+                          href="demande-detail.html"
+                        >
+                          Examiner
+                          <span class="sr-only">
+                            la demande de Thomas Roux
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="card" aria-labelledby="presence-title">
+              <div class="card__header">
+                <h2 class="card__title" id="presence-title">
+                  Présence aujourd'hui
+                </h2>
+              </div>
+
+              <ul class="list" role="list">
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">CM</span>
+                    <div>
+                      <strong>Claire Martin</strong>
+                      <p class="list__meta">Présente</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--success">Présente</span>
+                </li>
+
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">LD</span>
+                    <div>
+                      <strong>Lucas Dubois</strong>
+                      <p class="list__meta">Présent</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--success">Présent</span>
+                </li>
+
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">AN</span>
+                    <div>
+                      <strong>Amina Nasri</strong>
+                      <p class="list__meta">Absente</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--warning">Absente</span>
+                </li>
+
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">TR</span>
+                    <div>
+                      <strong>Thomas Roux</strong>
+                      <p class="list__meta">Présent</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--success">Présent</span>
+                </li>
+
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">JP</span>
+                    <div>
+                      <strong>Julie Petit</strong>
+                      <p class="list__meta">Présente</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--success">Présente</span>
+                </li>
+
+                <li class="list__item">
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">MF</span>
+                    <div>
+                      <strong>Mehdi Fontaine</strong>
+                      <p class="list__meta">Absent</p>
+                    </div>
+                  </div>
+                  <span class="badge badge--warning">Absent</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/app.js"></script>
+  </body>
+</html>

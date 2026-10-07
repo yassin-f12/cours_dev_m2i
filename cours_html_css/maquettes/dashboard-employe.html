@@ -103,7 +103,137 @@
 
       <main class="app__main" id="contenu" tabindex="-1">
         <div class="container">
-          <!-- Contenu du dashboard : étape 3 -->
+          <header class="page-header">
+            <div>
+              <h1>Bonjour Claire</h1>
+              <p class="page-header__subtitle">
+                Voici un résumé de votre espace personnel.
+              </p>
+            </div>
+
+            <div class="page-header__actions">
+              <a class="btn btn--secondary" href="note-frais-nouvelle.html">
+                Nouvelle note de frais
+              </a>
+              <a class="btn btn--primary" href="conges-demande.html">
+                Demander un congé
+              </a>
+            </div>
+          </header>
+
+          <section aria-labelledby="soldes-title">
+            <h2 class="sr-only" id="soldes-title">Mes soldes</h2>
+
+            <ul class="grid-auto" role="list">
+              <li class="card stat">
+                <p class="stat__label">CP restants</p>
+                <p class="stat__value">14</p>
+              </li>
+
+              <li class="card stat">
+                <p class="stat__label">RTT restants</p>
+                <p class="stat__value">6</p>
+              </li>
+
+              <li class="card stat">
+                <p class="stat__label">Notes de frais en attente</p>
+                <p class="stat__value">1</p>
+              </li>
+
+              <li class="card stat">
+                <p class="stat__label">Matériel attribué</p>
+                <p class="stat__value">Aucun</p>
+              </li>
+            </ul>
+          </section>
+
+          <div class="grid-split">
+            <section class="card" aria-labelledby="absences-title">
+              <div class="card__header">
+                <h2 class="card__title" id="absences-title">
+                  Mes prochaines absences
+                </h2>
+              </div>
+
+              <ul class="list" role="list">
+                <li class="list__item">
+                  <div>
+                    <strong>Congés payés</strong>
+                    <div class="list__meta">
+                      <time datetime="2026-10-26">26/10/2026</time>
+                      au
+                      <time datetime="2026-10-30">30/10/2026</time>
+                      · 5 jours
+                    </div>
+                  </div>
+
+                  <span class="badge badge--pending">En attente manager</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="card" aria-labelledby="materiel-title">
+              <div class="card__header">
+                <h2 class="card__title" id="materiel-title">Mon matériel</h2>
+              </div>
+
+              <p>Aucun matériel</p>
+            </section>
+          </div>
+
+          <section class="card" aria-labelledby="frais-title">
+            <div class="card__header">
+              <h2 class="card__title" id="frais-title">
+                Mes dernières notes de frais
+              </h2>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Statut</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td><time datetime="2026-09-12">12/09/2026</time></td>
+                    <td>Train Lyon - Paris, salon Devoxx</td>
+                    <td>Transport</td>
+                    <td>89,50 €</td>
+                    <td>
+                      <span class="badge badge--pending"
+                        >En attente manager</span
+                      >
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><time datetime="2026-09-15">15/09/2026</time></td>
+                    <td>Déjeuner client Axelis</td>
+                    <td>Restauration</td>
+                    <td>42,00 €</td>
+                    <td><span class="badge badge--approved">Validée</span></td>
+                  </tr>
+
+                  <tr>
+                    <td><time datetime="2026-09-02">02/09/2026</time></td>
+                    <td>Hôtel, formation Kubernetes</td>
+                    <td>Hébergement</td>
+                    <td>128,00 €</td>
+                    <td>
+                      <span class="badge badge--refunded">Remboursée</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
         </div>
       </main>
     </div>

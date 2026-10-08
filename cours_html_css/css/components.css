@@ -332,6 +332,7 @@
   border-radius: var(--radius);
   color: var(--color-text);
   text-decoration: none;
+  transition: background-color var(--transition);
 }
 
 .nav__link:hover {
@@ -430,6 +431,11 @@ td {
 
 th {
   font-weight: var(--weight-semibold);
+  background-color: var(--color-surface-muted);
+}
+
+tbody tr:hover {
+  background-color: var(--color-surface-muted);
 }
 
 @media (min-width: 64em) {

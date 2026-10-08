@@ -1,0 +1,266 @@
+<!doctype html>
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demande de congé - TechCorp RH</title>
+    <meta
+      name="description"
+      content="Formulaire de demande de congé de Claire Martin."
+    />
+
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
+    <div class="app">
+      <header class="app__header topbar">
+        <button
+          class="topbar__menu"
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
+          <svg
+            class="nav__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span class="sr-only">Ouvrir le menu</span>
+        </button>
+
+        <a class="brand" href="dashboard-employe.html">
+          <img
+            class="brand__logo"
+            src="../assets/logo.svg"
+            alt=""
+            width="32"
+            height="32"
+          />
+          TechCorp RH
+        </a>
+
+        <div class="topbar__actions">
+          <div class="user">
+            <span class="avatar" aria-hidden="true">CM</span>
+
+            <div class="user__info">
+              <p class="user__name">Claire Martin</p>
+              <p class="user__role">Développeuse</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <nav
+        class="app__sidebar sidebar"
+        id="navigation"
+        aria-label="Navigation principale"
+      >
+        <h2 class="nav__heading" id="nav-perso">Mon espace</h2>
+
+        <ul class="nav" role="list" aria-labelledby="nav-perso">
+          <li>
+            <a class="nav__link" href="dashboard-employe.html">
+              Tableau de bord
+            </a>
+          </li>
+
+          <li>
+            <a class="nav__link" href="conges-demande.html" aria-current="page">
+              Mes congés
+            </a>
+          </li>
+
+          <li>
+            <a class="nav__link" href="note-frais-nouvelle.html">
+              Notes de frais
+            </a>
+          </li>
+
+          <li>
+            <a class="nav__link" href="materiel.html"> Matériel </a>
+          </li>
+
+          <li>
+            <a class="nav__link" href="profil.html"> Mon profil </a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="app__main" id="contenu" tabindex="-1">
+        <div class="container">
+          <header class="page-header">
+            <div>
+              <h1>Demander un congé</h1>
+              <p class="page-header__subtitle">
+                Faites votre demande d'absence.
+              </p>
+            </div>
+          </header>
+
+          <div class="grid-split">
+            <form class="card form" action="#" method="post">
+              <p class="text-sm text-muted">
+                Les champs marqués d'un astérisque (<span
+                  class="field__required"
+                  >*</span
+                >) sont obligatoires.
+              </p>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset__legend">
+                  Type de congé
+                  <span class="field__required" aria-hidden="true">*</span>
+                </legend>
+
+                <div class="choices">
+                  <label class="choice">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="cp"
+                      required
+                      checked
+                    />
+                    Congés payés
+                  </label>
+
+                  <label class="choice">
+                    <input type="radio" name="type" value="rtt" />
+                    RTT
+                  </label>
+
+                  <label class="choice">
+                    <input type="radio" name="type" value="maladie" />
+                    Maladie
+                  </label>
+
+                  <label class="choice">
+                    <input type="radio" name="type" value="sans-solde" />
+                    Sans solde
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="date-debut">
+                    Date de début
+                    <span class="field__required" aria-hidden="true">*</span>
+                  </label>
+
+                  <input
+                    class="input"
+                    type="date"
+                    id="date-debut"
+                    name="date_debut"
+                    min="2026-10-05"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="date-fin">
+                    Date de fin
+                    <span class="field__required" aria-hidden="true">*</span>
+                  </label>
+
+                  <input
+                    class="input"
+                    type="date"
+                    id="date-fin"
+                    name="date_fin"
+                    min="2026-10-05"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="alert alert--info">
+                <p>
+                  Durée calculée :
+                  <output for="date-debut date-fin" aria-live="polite">
+                    <strong>5 jours ouvrés</strong>
+                  </output>
+                  (week-ends et jours fériés exclus).
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="motif">
+                  Motif
+                  <span class="text-muted">(facultatif)</span>
+                </label>
+
+                <textarea
+                  class="textarea"
+                  id="motif"
+                  name="motif"
+                  maxlength="500"
+                  aria-describedby="motif-aide"
+                ></textarea>
+
+                <p class="field__hint" id="motif-aide">
+                  500 caractères maximum. Visible par votre manager et le
+                  service RH.
+                </p>
+              </div>
+
+              <div class="form__actions">
+                <a class="btn btn--secondary" href="dashboard-employe.html">
+                  Annuler
+                </a>
+
+                <button class="btn btn--primary" type="submit">
+                  Envoyer la demande
+                </button>
+              </div>
+            </form>
+
+            <aside class="card" aria-labelledby="solde-title">
+              <div class="card__header">
+                <h2 class="card__title" id="solde-title">
+                  Mon solde de congés payés
+                </h2>
+              </div>
+
+              <dl class="details">
+                <div>
+                  <dt>Solde initial</dt>
+                  <dd>25 jours</dd>
+                </div>
+
+                <div>
+                  <dt>Congés pris</dt>
+                  <dd>8 jours</dd>
+                </div>
+
+                <div>
+                  <dt>En attente</dt>
+                  <dd>3 jours</dd>
+                </div>
+
+                <div>
+                  <dt>Solde restant</dt>
+                  <dd><strong>14 jours</strong></dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

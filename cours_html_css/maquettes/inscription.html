@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Inscription - TechCorp RH</title>
+    <meta
+      name="description"
+      content="Créez votre compte professionnel TechCorp RH."
+    />
+
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+
+  <body>
+    <div class="auth">
+      <aside class="auth__aside">
+        <div>
+          <strong>TechCorp RH</strong>
+          <p>Votre espace ressources humaines.</p>
+        </div>
+
+        <img src="../assets/rh.png" alt="" />
+
+        <p>© 2026 TechCorp RH</p>
+      </aside>
+
+      <main class="auth__main">
+        <div class="auth__panel">
+          <h1>Créer un compte</h1>
+
+          <p>Renseignez vos informations professionnelles.</p>
+
+          <form class="form" action="#" method="post" novalidate>
+            <div class="alert alert--error" role="alert">
+              <p><strong>Le formulaire contient 2 erreurs</strong></p>
+
+              <ul>
+                <li>
+                  <a href="#email">Cette adresse e-mail est déjà utilisée.</a>
+                </li>
+                <li>
+                  <a href="#confirmation">
+                    Les mots de passe ne correspondent pas.
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <p>Tous les champs sont obligatoires.</p>
+
+            <div class="field">
+              <label class="field__label" for="prenom">Prénom</label>
+              <input
+                class="input"
+                type="text"
+                id="prenom"
+                name="prenom"
+                autocomplete="given-name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="nom">Nom</label>
+              <input
+                class="input"
+                type="text"
+                id="nom"
+                name="nom"
+                autocomplete="family-name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">
+                Adresse e-mail professionnelle
+              </label>
+
+              <input
+                class="input"
+                type="email"
+                id="email"
+                name="email"
+                value="lina.moreau@techcorp.fr"
+                autocomplete="email"
+                aria-invalid="true"
+                aria-describedby="email-erreur"
+                required
+              />
+
+              <p class="field__error" id="email-erreur">
+                Cette adresse e-mail est déjà utilisée.
+              </p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="password"> Mot de passe </label>
+
+              <input
+                class="input"
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="new-password"
+                aria-describedby="password-regles"
+                required
+              />
+
+              <ul class="rules" id="password-regles">
+                <li>Au moins 12 caractères</li>
+                <li>Une majuscule et une minuscule</li>
+                <li>Un chiffre</li>
+              </ul>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="confirmation">
+                Confirmer le mot de passe
+              </label>
+
+              <input
+                class="input"
+                type="password"
+                id="confirmation"
+                name="confirmation"
+                autocomplete="new-password"
+                aria-invalid="true"
+                aria-describedby="confirmation-erreur"
+                required
+              />
+
+              <p class="field__error" id="confirmation-erreur">
+                Les mots de passe ne correspondent pas.
+              </p>
+            </div>
+
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                id="confidentialite"
+                name="confidentialite"
+                required
+              />
+              <span>
+                J'accepte le traitement de mes données personnelles conformément
+                à la politique de confidentialité.
+              </span>
+            </label>
+
+            <button class="btn btn--primary" type="submit">
+              Créer mon compte
+            </button>
+          </form>
+
+          <p>
+            Vous avez déjà un compte ?
+            <a href="login.html">Se connecter</a>
+          </p>
+
+          <footer>
+            <a href="#">Mentions légales</a>
+            <a href="#">Confidentialité</a>
+            <a href="#">Accessibilité</a>
+          </footer>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

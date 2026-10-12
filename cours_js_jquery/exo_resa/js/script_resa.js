@@ -19,7 +19,7 @@ document.querySelector("#calculer").addEventListener("click", function () {
   let messageFrais = document.querySelector("#message");
   let affpromo = document.querySelector("#promoApp");
   let promo = document.querySelector("#promo").value;
-  let code = document.querySelector("#code");
+  let codeMsg = document.querySelector("#code");
 
   let prixBillet = 25;
   let sousTotal = prixBillet * quantite;
@@ -28,6 +28,7 @@ document.querySelector("#calculer").addEventListener("click", function () {
   let frais = 0;
   let montantPromo;
 
+  // Calcule tarif réduit
   if (tarifReduit === "oui") {
     montantReduc = sousTotal * 0.1;
     affReduc.textContent = montantReduc.toFixed(2) + " €";
@@ -35,6 +36,7 @@ document.querySelector("#calculer").addEventListener("click", function () {
     affReduc.textContent = "0 €";
   }
 
+  // Calcule assurance
   if (assurance === "oui") {
     prixAssurance = 2 * quantite;
     affAssurance.textContent = prixAssurance.toFixed(2) + " €";
@@ -44,19 +46,21 @@ document.querySelector("#calculer").addEventListener("click", function () {
 
   let totalTTC = sousTotal - montantReduc + prixAssurance;
 
+  // Calcule PROMO
   if (promo !== "") {
-    code.textContent = "";
+    codeMsg.textContent = "";
     if (promo === "12345") {
-      code.textContent = "bon code";
+      codeMsg.textContent = "bon code";
       montantPromo = totalTTC * 0.1;
       affpromo.textContent = "- " + montantPromo.toFixed(2) + " €";
       totalTTC = totalTTC - montantPromo;
     } else {
-      code.textContent = "mauvais code, essayer avec 12345";
+      codeMsg.textContent = "mauvais code, essayer avec 12345";
       affpromo.textContent = "0 €";
     }
   }
 
+  // Calcule frais
   if (totalTTC < 100) {
     frais = 5;
     messageFrais.textContent = "frais supp de 5 €";

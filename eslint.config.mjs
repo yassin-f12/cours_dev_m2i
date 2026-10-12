@@ -14,6 +14,9 @@ export default defineConfig([
         ...globals.node,
       },
     },
+    rules: {
+      "no-unused-vars": "off",
+    },
   },
   { files: ["**/*.js"], languageOptions: { sourceType: "module" } },
   {

@@ -1,3 +1,11 @@
+/*
+1. Afficher le nombre de stagiaires -> ok
+2. Afficher tous les stagiaires -> ok
+3. Trouver les admis -> ok
+4. Calculer la moyenne
+5. Recherche par prénom
+*/
+
 const stagiaires = [
   {
     prenom: "Léa",
@@ -21,14 +29,6 @@ const stagiaires = [
   },
 ];
 
-/*
-1. Afficher le nombre de stagiaires -> ok
-2. Afficher tous les stagiaires -> ok
-3. Trouver les admis -> ok
-4. Calculer la moyenne
-5. Recherche par prénom
-*/
-
 // mes variables
 let nombre = document.querySelector("#nombre");
 let admis = document.querySelector("#admis");
@@ -43,12 +43,21 @@ let liste = document.querySelector("#liste");
 // nombre  total stagiaires
 nombre.textContent = stagiaires.length;
 
-// calcule de la moyenne
+// compteur d'admis
+let comptAdmis = 0;
+for (let i = 0; i < stagiaires.length; i++) {
+  if (stagiaires[i].note >= 10) {
+    comptAdmis++;
+  }
+}
+admis.textContent = comptAdmis;
 
+// calcule de la moyenne
 const somme = stagiaires.reduce((acc, obj) => acc + obj.note, 0);
 const CalcMoyenne = somme / stagiaires.length;
 moyenne.textContent = CalcMoyenne;
 
+// fonction affichage des listes dans une div pour le style
 function affLists(prenom, note) {
   const div = document.createElement("div");
   div.className = "stagiaire";
@@ -70,45 +79,33 @@ function affLists(prenom, note) {
   return div;
 }
 
-// boucle affichage liste + les admis
-for (let i = 0; i < stagiaires.length; i++) {
-  const noms = stagiaires[i].prenom;
-  const notes = stagiaires[i].note;
-
-  const nvDiv = affLists(noms, notes);
-  liste.appendChild(nvDiv);
-
-  if (notes >= 10) {
-    admis.textContent = i;
-  }
-}
-
-// event  sur mon btn afficher tous
-tousBtn.addEventListener("click", () => {
+// fonction pour afficher les listes
+function afficherStagiaires(stagiairesALister) {
   liste.innerHTML = "";
 
-  for (let i = 0; i < stagiaires.length; i++) {
-    const noms = stagiaires[i].prenom;
-    const notes = stagiaires[i].note;
+  for (let i = 0; i < stagiairesALister.length; i++) {
+    const noms = stagiairesALister[i].prenom;
+    const notes = stagiairesALister[i].note;
 
     const nvDiv = affLists(noms, notes);
     liste.appendChild(nvDiv);
   }
+}
+
+// affichage liste générale
+afficherStagiaires(stagiaires);
+
+// event sur mon btn afficher tous
+tousBtn.addEventListener("click", () => {
+  afficherStagiaires(stagiaires);
 });
 
 // event  sur mon btn afficher tous les admis uniquement
 admisBtn.addEventListener("click", () => {
-  liste.innerHTML = "";
-
-  for (let i = 0; i < stagiaires.length; i++) {
-    const noms = stagiaires[i].prenom;
-    const notes = stagiaires[i].note;
-
-    if (notes >= 10) {
-      const nvDiv = affLists(noms, notes);
-      liste.appendChild(nvDiv);
-    }
-  }
+  const stagiairesAdmis = stagiaires.filter(
+    (stagiaire) => stagiaire.note >= 10,
+  );
+  afficherStagiaires(stagiairesAdmis);
 });
 
 // event  sur mon btn rechercher

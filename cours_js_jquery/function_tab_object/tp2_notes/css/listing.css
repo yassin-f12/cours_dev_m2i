@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  background: #eef2f7;
+  color: #1e293b;
+}
+
+.app {
+  width: 800px;
+  max-width: 95%;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  text-align: center;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.carte {
+  padding: 20px;
+  text-align: center;
+  background: #eff6ff;
+  border-radius: 10px;
+}
+
+.carte span {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.carte strong {
+  font-size: 26px;
+  color: #2563eb;
+}
+
+.actions {
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 10px 16px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.recherche {
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+input {
+  padding: 9px;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+.result {
+  padding: 15px 0;
+}
+
+.stagiaire {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.admis {
+  color: green;
+}
+
+.non-admis {
+  color: crimson;
+}

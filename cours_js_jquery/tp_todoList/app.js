@@ -25,7 +25,7 @@ btnAdd.addEventListener("click", () => {
   btnDelete.className = "btn-delete";
 
   li.append(span, btnDelete);
-  ul.append(li);
+  ul.prepend(li);
 
   input.value = "";
   verifierInput();

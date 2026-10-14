@@ -1,7 +1,6 @@
 const input = document.querySelector("#input-tache");
 const btnAdd = document.querySelector("#btn-add");
-let compteur = document.querySelector("#nombre");
-const lists = document.querySelector("#liste");
+const compteur = document.querySelector("#nombre");
 const ul = document.querySelector("#content-lists");
 
 function verifierInput() {
@@ -12,14 +11,13 @@ verifierInput();
 
 input.addEventListener("input", verifierInput);
 
-btnAdd.addEventListener("click", () => {
+function todo() {
   const li = document.createElement("li");
   const btnDelete = document.createElement("button");
   const span = document.createElement("span");
 
   span.textContent = input.value;
-  li.className = "li";
-  li.classList.add("taches");
+  li.classList.add("li", "taches");
 
   btnDelete.textContent = "Supprimer";
   btnDelete.className = "btn-delete";
@@ -32,13 +30,22 @@ btnAdd.addEventListener("click", () => {
 
   compteur.textContent = ul.querySelectorAll("li").length;
 
-  btnDelete.addEventListener("click", (event) => {
+  btnDelete.addEventListener("click", () => {
     li.remove();
-    event.stopPropagation();
     compteur.textContent = ul.querySelectorAll("li").length;
   });
 
   span.addEventListener("click", () => {
     span.classList.toggle("line-th");
   });
+}
+
+btnAdd.addEventListener("click", () => {
+  todo();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    todo();
+  }
 });

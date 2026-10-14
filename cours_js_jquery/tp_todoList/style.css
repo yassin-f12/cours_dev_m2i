@@ -103,11 +103,11 @@ h2 {
   cursor: pointer;
 }
 
-.line-th:first-child {
-  text-decoration: line-through;
-  color: #149911;
-}
-
 .li:hover {
   color: #777;
+}
+
+.line-th {
+  text-decoration: line-through;
+  color: #149911;
 }

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo list - TP 3 - JS / JQUERY</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <h1>Mes tâches</h1>
+
+      <section class="ajout">
+        <input type="text" placeholder="Entrer une tâche" id="input-tache" />
+        <button class="btn-ajout" id="btn-add">Ajouter</button>
+      </section>
+
+      <section class="compteur">
+        <p>Nombre de tâches :</p>
+        <strong id="nombre">0</strong>
+      </section>
+
+      <h2>Liste des tâches</h2>
+
+      <section id="liste">
+        <ul id="content-lists"></ul>
+      </section>
+    </main>
+  </body>
+</html>

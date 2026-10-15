@@ -1,0 +1,92 @@
+.boite {
+  width: 100px;
+  height: 100px;
+  background-color: goldenrod;
+  margin: 20px 0;
+}
+
+.main {
+  width: 800px;
+  max-width: 95%;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 14px;
+  position: relative;
+}
+
+#carte {
+  width: 400px;
+  height: 60vh;
+  position: absolute;
+  left: 200px;
+  top: -200px;
+  object-fit: contain;
+}
+
+#point {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.point1 {
+  right: 350px;
+}
+.point2 {
+  right: 430px;
+  top: -105px;
+}
+
+.items {
+  position: absolute;
+  right: 300px;
+  top: 80px;
+}
+
+#item1,
+#item2 {
+  cursor: pointer;
+  padding: 10px;
+  background-color: brown;
+  color: aliceblue;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+#item1:hover,
+#item2:hover {
+  background-color: red;
+}
+
+.card {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  position: absolute;
+  right: 250px;
+  top: 300px;
+}
+
+.card button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+#title-ville {
+  position: absolute;
+  bottom: 80px;
+  left: 620px;
+}

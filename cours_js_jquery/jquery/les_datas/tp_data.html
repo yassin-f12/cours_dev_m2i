@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP - cours jquery - DATA</title>
+    <script
+      type="text/javascript"
+      src="../js/jquery-4.0.0.min.js"
+      defer
+    ></script>
+    <script src="../js/tp-data.js" defer></script>
+    <link rel="stylesheet" href="../css/tp-data.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ma galerie</h1>
+      <p>Balade toi dans l'espace</p>
+    </header>
+
+    <main class="galerie">
+      <div
+        class="card"
+        data-title="Neptune"
+        data-description="Une planète glacée"
+        data-image="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D?w=800"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D?w=800"
+          alt=""
+        />
+        <h2>Neptune</h2>
+      </div>
+
+      <div
+        class="card"
+        data-title="Uranus"
+        data-description="Une planète froide"
+        data-image="https://plus.unsplash.com/premium_photo-1719418813067-932d9fd09fa1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3Dw=800"
+      >
+        <img
+          src="https://plus.unsplash.com/premium_photo-1719418813067-932d9fd09fa1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3Dw=800"
+          alt=""
+        />
+        <h2>Uranus</h2>
+      </div>
+
+      <div
+        class="card"
+        data-title="Jupiter"
+        data-description="Une planète grande"
+        data-image="https://images.unsplash.com/photo-1630839437035-dac17da580d0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3Dw=800"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1630839437035-dac17da580d0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3Dw=800"
+          alt=""
+        />
+        <h2>Jupiter</h2>
+      </div>
+    </main>
+
+    <div class="modale">
+      <div class="contenu">
+        <button class="fermer">X</button>
+
+        <img class="image" src="" alt="" />
+
+        <div class="description">
+          <h2 class="titre"></h2>
+          <p class="texte"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

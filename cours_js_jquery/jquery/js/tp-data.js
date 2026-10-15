@@ -5,8 +5,9 @@ $(function () {
   const $titre = $(".titre");
   const $image = $(".image");
 
+  // action de clique sur les cards
   $(".card").click(function () {
-    // mes variables locales
+    // mes variables
     const desc = $(this).data("description");
     const title = $(this).data("title");
     const img = $(this).data("image");
@@ -30,7 +31,7 @@ $(function () {
     );
   });
 
-  // gestion de la fermeture de la modale
+  // action de clique pour la fermeture de la modale
   $(".fermer").click(function () {
     $modale.animate(
       {

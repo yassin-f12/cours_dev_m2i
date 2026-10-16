@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+}
+
+.card {
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  width: 900px;
+  height: 500px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+}
+
+.card img {
+  width: 380px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.contenu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contenu h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.contenu > p {
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #287a45;
+}
+
+button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #da5619;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.details {
+  display: none;
+  margin-top: 25px;
+  line-height: 2;
+  font-size: 16px;
+  background-color: beige;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.details-btn {
+  align-self: flex-start;
+}
+
+.footer-card {
+  margin-top: auto;
+}
+
+.panier {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.panier label {
+  margin: 0;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+input {
+  width: 138px;
+  padding: 12px;
+  margin: 0;
+  border: 1px solid #777;
+  border-radius: 8px;
+}
+
+.ajouter {
+  white-space: nowrap;
+  background-color: #2457a7;
+  color: white;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 17px;
+  color: #287a45;
+}
+
+.null {
+  color: crimson;
+}

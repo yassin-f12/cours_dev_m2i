@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tp fiche produit</title>
+    <script
+      type="text/javascript"
+      src="../js/jquery-4.0.0.min.js"
+      defer
+    ></script>
+    <script src="../js/produit.js" defer></script>
+    <link rel="stylesheet" href="../css/produit.css" />
+  </head>
+  <body>
+    <main class="card" data-nom="Casque audio" data-prix="89.90">
+      <img
+        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+        alt="Casque audio"
+      />
+
+      <div class="contenu">
+        <h1>Casque audio</h1>
+        <p>89,90 €</p>
+
+        <button
+          class="details-btn"
+          data-ouvert="Masquer les détails"
+          data-ferme="Voir les détails"
+        >
+          Voir les détails
+        </button>
+
+        <div class="details">
+          <p>- Autonomie : 30 heures</p>
+          <p>- Bluetooth 5.3</p>
+          <p>- Réduction de bruit active</p>
+        </div>
+
+        <section class="footer-card">
+          <hr />
+          <div class="panier">
+            <label for="quantite">Quantité :</label>
+            <input type="number" id="quantite" min="1" value="1" />
+
+            <button class="ajouter">Ajouter au panier</button>
+          </div>
+          <p class="message"></p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

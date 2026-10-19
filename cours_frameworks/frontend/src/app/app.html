@@ -1,8 +1,14 @@
 <a class="skip-link" href="#contenu">Aller au contenu principal</a>
 
-<div class="app">
+<div class="app" [class.app--nav-open]="menuOuvert()">
   <header class="app__header topbar">
-    <button class="topbar__menu" type="button" aria-expanded="false" aria-controls="navigation">
+    <button
+      class="topbar__menu"
+      type="button"
+      [attr.aria-expanded]="menuOuvert()"
+      aria-controls="navigation"
+      (click)="basculerMenu()"
+    >
       <svg
         class="nav__icon"
         viewBox="0 0 24 24"
@@ -14,7 +20,9 @@
       >
         <path d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-      <span class="sr-only">Ouvrir le menu</span>
+      <span class="sr-only">
+        {{ menuOuvert() ? 'Fermer le menu' : 'Ouvrir le menu' }}
+      </span>
     </button>
 
     <a class="brand" href="/">

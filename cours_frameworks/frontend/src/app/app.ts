@@ -12,6 +12,11 @@ import { LEAVE_TYPE_LABELS, LeaveRequest } from './models/leave-request';
 })
 export class App {
   protected readonly title = signal('techcorp-rh');
+  protected readonly menuOuvert = signal(false);
+
+  protected basculerMenu(): void {
+    this.menuOuvert.update((valeur) => !valeur);
+  }
 
   protected readonly currentUser: Employee = {
     id: 1,

@@ -1,0 +1,69 @@
+<form class="form" (ngSubmit)="submit()">
+  <div class="field">
+    <label class="field__label" for="quick-type">Type de congé</label>
+    <select
+      class="select"
+      id="quick-type"
+      name="type"
+      [ngModel]="type()"
+      (ngModelChange)="type.set($event)"
+    >
+      @for (option of typeOptions; track option[0]) {
+        <option [value]="option[0]">{{ option[1] }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="form__row">
+    <div class="field">
+      <label class="field__label" for="quick-start">Date de début</label>
+      <input
+        class="input"
+        type="date"
+        id="quick-start"
+        name="startDate"
+        [ngModel]="startDate()"
+        (ngModelChange)="startDate.set($event)"
+      />
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="quick-end">Date de fin</label>
+      <input
+        class="input"
+        type="date"
+        id="quick-end"
+        name="endDate"
+        [min]="startDate()"
+        [ngModel]="endDate()"
+        (ngModelChange)="endDate.set($event)"
+      />
+    </div>
+  </div>
+
+  <p aria-live="polite">
+    @if (days() !== null) {
+      Durée :
+      <strong>
+        {{ days() }} jour{{ days() === 1 ? '' : 's' }} ouvré{{ days() === 1 ? '' : 's' }} </strong
+      >.
+
+      @if (type() === 'paid') {
+        Solde après la demande :
+        <strong>{{ remainingAfter() }} jours</strong>.
+      }
+    } @else {
+      Choisissez une date de début et une date de fin.
+    }
+  </p>
+
+  @if (remainingAfter() < 0) {
+    <p class="alert alert--error" role="alert">La demande dépasse votre solde de congés payés.</p>
+  }
+
+  <div class="form__actions">
+    <button class="btn btn--primary" type="submit" [disabled]="!canSubmit()">
+      Ajouter la demande
+    </button>
+  </div>
+</form>

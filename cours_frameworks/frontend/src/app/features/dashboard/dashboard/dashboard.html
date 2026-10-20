@@ -21,7 +21,16 @@
   </li>
 </ul>
 
-<section class="card" style="margin-top: 1.5rem" aria-labelledby="titre-demandes">
-  <h2 id="titre-demandes" class="card__title">Mes demandes</h2>
-  <app-leave-list [requests]="leaves.myRequests()" (cancelRequest)="cancelLeave($event)" />
-</section>
+<div class="grid-split mt-5">
+  <section class="card" aria-labelledby="titre-nouvelle">
+    <h2 id="titre-nouvelle" class="card__title mb-4">Nouvelle demande rapide</h2>
+
+    <app-leave-quick-form [remaining]="balance.remaining" (submitted)="addLeave($event)" />
+  </section>
+
+  <section class="card" aria-labelledby="titre-demandes">
+    <h2 id="titre-demandes" class="card__title mb-4">Mes demandes</h2>
+
+    <app-leave-list [requests]="leaves.myRequests()" (cancelRequest)="cancelLeave($event)" />
+  </section>
+</div>

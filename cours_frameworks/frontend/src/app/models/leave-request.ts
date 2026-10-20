@@ -18,3 +18,10 @@ export const LEAVE_TYPE_LABELS: Record<LeaveType, string> = {
   sick: 'Maladie',
   unpaid: 'Sans solde',
 };
+
+export const LEAVE_STATUS_LABELS: Record<LeaveStatus, string> = {
+  pending: 'En attente',
+  'manager-approved': 'Validée par le manager',
+  approved: 'Approuvée',
+  rejected: 'Refusée',
+};

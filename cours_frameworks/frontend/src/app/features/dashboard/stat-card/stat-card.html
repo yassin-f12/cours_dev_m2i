@@ -1,0 +1,15 @@
+<span class="stat__label">{{ label() }}</span>
+<span class="stat__value">
+  {{ value() }}
+  @if (unit()) {
+    <span class="stat__unit">{{ unit() }}</span>
+  }
+</span>
+@if (percent() !== null) {
+  <div class="bar" aria-hidden="true">
+    <div class="bar__fill" [style.width.%]="percent()"></div>
+  </div>
+}
+@if (hint()) {
+  <span class="stat__hint">{{ hint() }}</span>
+}

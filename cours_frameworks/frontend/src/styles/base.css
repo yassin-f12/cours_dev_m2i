@@ -32,6 +32,7 @@ h4 {
 
 h1 {
   font-size: var(--text-2xl);
+  margin-bottom: var(--space-5);
 }
 
 h2 {

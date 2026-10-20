@@ -1,30 +1,17 @@
 <a class="skip-link" href="#contenu">Aller au contenu principal</a>
 
 <div class="app" [class.app--nav-open]="menuOuvert()">
-  <app-topbar [user]="currentUser" [navOpen]="menuOuvert()" (menuToggle)="basculerMenu()" />
+  <app-topbar
+    [user]="session.currentUser()"
+    [navOpen]="menuOuvert()"
+    (menuToggle)="basculerMenu()"
+  />
 
   <app-sidebar />
 
   <main class="app__main" id="contenu" tabindex="-1">
     <div class="container">
-      <h1>Bonjour {{ currentUser.firstName }}</h1>
-
-      <ul class="grid-auto stats-list" role="list">
-        <li>
-          <app-stat-card label="Congés payés restants" [value]="10" unit="jours" [max]="25" />
-        </li>
-        <li>
-          <app-stat-card label="RTT restants" [value]="6" unit="jours" />
-        </li>
-      </ul>
-
-      <section class="card" aria-labelledby="titre-prochain-conge">
-        <h2 id="titre-prochain-conge">Prochain congé</h2>
-        <p>
-          {{ nextLeaveType }} du {{ nextLeave.startDate }} au
-          {{ nextLeave.endDate }}
-        </p>
-      </section>
+      <app-dashboard />
 
       <router-outlet />
     </div>

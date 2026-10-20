@@ -1,0 +1,29 @@
+<ul class="list" role="list">
+  @for (request of requests(); track request.id) {
+    <li class="list__item">
+      <div>
+        <p class="font-semibold">{{ typeLabels[request.type] }}</p>
+        <p class="list__meta">
+          Du {{ request.startDate | date: 'd MMMM' }} au
+          {{ request.endDate | date: 'd MMMM y' }}
+        </p>
+      </div>
+
+      <div class="flex gap-2 items-center">
+        <app-status-badge [status]="request.status" />
+
+        @if (request.status === 'pending') {
+          <button
+            class="btn btn--ghost btn--sm"
+            type="button"
+            (click)="cancelRequest.emit(request.id)"
+          >
+            Annuler
+          </button>
+        }
+      </div>
+    </li>
+  } @empty {
+    <li class="text-muted">Aucune demande de congé.</li>
+  }
+</ul>

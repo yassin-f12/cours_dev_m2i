@@ -1,0 +1,27 @@
+@let balance = leaves.paidLeaveBalance();
+
+<div class="page-header">
+  <div>
+    <h1>Bonjour {{ session.currentUser().firstName }}</h1>
+  </div>
+</div>
+
+<ul class="grid-auto list" role="list">
+  <li>
+    <app-stat-card
+      label="Congés payés restants"
+      unit="jours"
+      [value]="balance.remaining"
+      [max]="balance.total"
+      [hint]="balance.taken + ' pris, ' + balance.pending + ' en attente, sur ' + balance.total"
+    />
+  </li>
+  <li>
+    <app-stat-card label="En attente de validation" [value]="balance.pending" unit="jours" />
+  </li>
+</ul>
+
+<section class="card" style="margin-top: 1.5rem" aria-labelledby="titre-demandes">
+  <h2 id="titre-demandes" class="card__title">Mes demandes</h2>
+  <app-leave-list [requests]="leaves.myRequests()" (cancelRequest)="cancelLeave($event)" />
+</section>

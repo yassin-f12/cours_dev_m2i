@@ -1,18 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Sidebar } from './layout/sidebar/sidebar';
 import { Employee } from './models/employee';
 import { LEAVE_TYPE_LABELS, LeaveRequest } from './models/leave-request';
+import { Sidebar } from './layout/sidebar/sidebar';
+import { Topbar as TopBar } from './layout/topbar/topbar';
 import { StatCard } from './features/dashboard/stat-card/stat-card';
 
 @Component({
-  imports: [RouterOutlet, Sidebar, StatCard],
+  imports: [RouterOutlet, Sidebar, TopBar, StatCard],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('techcorp-rh');
   protected readonly menuOuvert = signal(false);
 
   protected basculerMenu(): void {

@@ -12,6 +12,9 @@ describe('SearchField', () => {
 
     fixture = TestBed.createComponent(SearchField);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('label', 'Rechercher');
+
     await fixture.whenStable();
   });
 

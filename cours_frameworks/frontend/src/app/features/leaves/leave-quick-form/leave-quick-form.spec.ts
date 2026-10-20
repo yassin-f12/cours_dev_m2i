@@ -12,6 +12,9 @@ describe('LeaveQuickForm', () => {
 
     fixture = TestBed.createComponent(LeaveQuickForm);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('remaining', 10);
+
     await fixture.whenStable();
   });
 

@@ -12,6 +12,9 @@ describe('LeaveList', () => {
 
     fixture = TestBed.createComponent(LeaveList);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('requests', []);
+
     await fixture.whenStable();
   });
 

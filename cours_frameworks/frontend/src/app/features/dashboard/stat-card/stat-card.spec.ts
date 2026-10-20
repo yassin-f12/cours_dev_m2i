@@ -12,6 +12,10 @@ describe('StatCard', () => {
 
     fixture = TestBed.createComponent(StatCard);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('label', 'Congés en attente');
+    fixture.componentRef.setInput('value', 10);
+
     await fixture.whenStable();
   });
 

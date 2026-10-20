@@ -12,6 +12,17 @@ describe('Topbar', () => {
 
     fixture = TestBed.createComponent(Topbar);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('user', {
+      id: 1,
+      firstName: 'Claire',
+      lastName: 'Martin',
+      email: 'claire.martin@example.com',
+      jobTitle: 'Développeuse',
+      role: 'employee',
+      hiredAt: '2024-01-15',
+    });
+
     await fixture.whenStable();
   });
 

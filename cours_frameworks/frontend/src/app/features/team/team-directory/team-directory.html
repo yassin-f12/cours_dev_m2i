@@ -1,0 +1,18 @@
+<app-search-field
+  label="Rechercher un membre de l'équipe"
+  placeholder="Prénom, nom ou poste..."
+  [(value)]="query"
+/>
+
+<p aria-live="polite">
+  {{ filteredEmployees().length }}
+  résultat{{ filteredEmployees().length > 1 ? 's' : '' }}
+</p>
+
+<div class="grid-auto">
+  @for (employee of filteredEmployees(); track employee.id) {
+    <app-employee-card [employee]="employee" />
+  } @empty {
+    <p>Aucun membre ne correspond à votre recherche.</p>
+  }
+</div>

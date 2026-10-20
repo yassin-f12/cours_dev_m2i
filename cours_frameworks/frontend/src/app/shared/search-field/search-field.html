@@ -1,0 +1,14 @@
+<div class="field">
+  <label class="field__label" [for]="fieldId">
+    {{ label() }}
+  </label>
+
+  <input
+    class="input"
+    type="search"
+    [id]="fieldId"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    (input)="value.set($any($event.target).value)"
+  />
+</div>

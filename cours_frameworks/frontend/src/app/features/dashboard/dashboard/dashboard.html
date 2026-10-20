@@ -33,4 +33,10 @@
 
     <app-leave-list [requests]="leaves.myRequests()" (cancelRequest)="cancelLeave($event)" />
   </section>
+
+  <section class="card" style="margin-top: 1.5rem" aria-labelledby="titre-annuaire">
+    <h2 id="titre-annuaire" class="card__title mb-4">Annuaire de l'équipe</h2>
+
+    <app-team-directory />
+  </section>
 </div>

@@ -4,10 +4,11 @@ import { LeaveList } from '../../leaves/leave-list/leave-list';
 import { LeaveQuickForm } from '../../leaves/leave-quick-form/leave-quick-form';
 import { Session } from '../../../core/session';
 import { LeaveStore, NewLeaveRequest } from '../../../core/leave-store';
+import { TeamDirectory } from '../../team/team-directory/team-directory';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [StatCard, LeaveList, LeaveQuickForm],
+  imports: [StatCard, LeaveList, LeaveQuickForm, TeamDirectory],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {

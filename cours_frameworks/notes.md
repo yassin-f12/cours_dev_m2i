@@ -20,3 +20,4 @@
   --ssr=false Désactive le rendu côté serveur
   --defaults Accepte les choix par défaut sans poser toutes les questions interactives)
 - ng g interface models/employee -> creer une interface pour définir la structure des données
+- ng generate guard leNom

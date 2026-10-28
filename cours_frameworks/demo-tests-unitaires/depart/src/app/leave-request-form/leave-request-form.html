@@ -1,0 +1,33 @@
+<section class="card" aria-labelledby="balance-title">
+  <h2 id="balance-title">Mon solde</h2>
+  <p class="balance">
+    Il vous reste <strong>{{ balance.remaining() | days }}</strong> sur
+    {{ balance.total | days }}.
+  </p>
+</section>
+
+<form class="form" aria-labelledby="request-title" (submit)="submit($event)">
+  <h2 id="request-title">Poser un congé</h2>
+
+  <div class="field">
+    <label for="start">Premier jour</label>
+    <input id="start" type="date" #startInput (input)="start.set(startInput.value)" />
+  </div>
+
+  <div class="field">
+    <label for="end">Dernier jour</label>
+    <input id="end" type="date" #endInput (input)="end.set(endInput.value)" />
+  </div>
+
+  <!-- aria-live : le lecteur d'ecran annonce le nouveau total quand une date change. -->
+  <p class="count" aria-live="polite">Jours ouvrés : {{ days() | days }}</p>
+
+  @if (error()) {
+    <p class="alert" role="alert">{{ error() }}</p>
+  }
+  @if (confirmation()) {
+    <p class="success" role="status">{{ confirmation() }}</p>
+  }
+
+  <button class="button" type="submit" [disabled]="days() === 0">Poser la demande</button>
+</form>

@@ -1,0 +1,26 @@
+/* Styles globaux : ils s'appliquent a toute l'application. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #111827;
+  background-color: #ffffff;
+}
+
+/* Contour de focus bien visible pour la navigation au clavier. */
+:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem;
+}

@@ -1,0 +1,14 @@
+<h1>Ma liste des salles</h1>
+<ul>
+  @for (salle of salles(); track $index) {
+    <li>
+      <a
+        matButton
+        [routerLink]="['/rooms', salle.id]"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        >{{ salle.name }}</a
+      >
+    </li>
+  }
+</ul>

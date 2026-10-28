@@ -1,0 +1,6 @@
+<h1>Les détails</h1>
+<ul>
+  @for (equipement of salle()?.equipment; track equipement) {
+    <li>{{ equipement }}</li>
+  }
+</ul>

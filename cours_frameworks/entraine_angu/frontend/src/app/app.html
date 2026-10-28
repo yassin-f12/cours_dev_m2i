@@ -1,0 +1,19 @@
+<header>
+  <mat-toolbar>
+    <nav aria-label="Navigation principale">
+      <a
+        matButton
+        routerLink="/rooms"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        Salles
+      </a>
+    </nav>
+  </mat-toolbar>
+</header>
+
+<main class="container">
+  <router-outlet />
+</main>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemma Chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h1>Gemma Chat</h1>
+        </div>
+
+        <button class="new-chat">+ Nouvelle discussion</button>
+
+        <div class="history">
+          <h2>Historique</h2>
+
+          <div class="history-list"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <p>Gemma 4 · 12B</p>
+          <span>Local avec Ollama</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="chat-header">
+          <span>Gemma 4 12B</span>
+          <span class="status">Local</span>
+        </header>
+
+        <section class="chat-container">
+          <div class="welcome">
+            <h2>Comment puis-je t'aider ?</h2>
+            <p>Discute avec ton assistant IA local.</p>
+          </div>
+
+          <div class="messages"></div>
+        </section>
+
+        <form class="chat-form">
+          <textarea placeholder="Écris ton message..." rows="1"></textarea>
+
+          <button type="submit" aria-label="Envoyer">↑</button>
+        </form>
+
+        <p class="disclaimer">
+          Gemma peut faire des erreurs. Pense à vérifier ses réponses.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>

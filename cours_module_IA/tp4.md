@@ -102,18 +102,17 @@ Phrase du mail :
 
 ## Récapitulatif
 
-| ID   | Fonctionnalité            |
-| ---- | ------------------------- |
-| US01 | Suividesobjetsreçus       |
-| US02 | Localisationdesobjets     |
-| US03 | Suividesventes            |
-| US04 | Harmonisationdesprix      |
-| US05 | Inscriptionauxpermanences |
-| US06 | Couverturedusamedi        |
-| US07 | Statistiques              |
-| US08 | Reçuspourlesdonateurs     |
-| US09 | Remplacementdestableurs   |
-| US10 | Pasdeventeenligne         |
+| ID   | Fonctionnalité              |
+| ---- | --------------------------- |
+| US01 | Suivi des objets reçus      |
+| US02 | Localisation des objets     |
+| US03 | Suivi des ventes            |
+| US04 | Harmonisation des prix      |
+| US05 | Inscription aux permanences |
+| US06 | Couverture du samedi        |
+| US07 | Statistiques                |
+| US08 | Reçus pour les donateurs    |
+| US09 | Pas de vente en ligne       |
 
 | User Story                                  | Classement  | Justification                                                                                                       |
 | ------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -125,7 +124,7 @@ Phrase du mail :
 | US06 — Couverture des permanences du samedi | À clarifier | Les trous du samedi sont mentionnés, mais le suivi des créneaux manquants n'est pas explicitement demandé.          |
 | US07 — Statistiques                         | Fidèle      | La demande de statistiques pour la mairie est explicite.                                                            |
 | US08 — Reçus pour les donateurs             | Fidèle      | Le mail indique que certains donateurs veulent un reçu.                                                             |
-| US10 — Absence de vente en ligne            | Fidèle      | La présidente précise que la vente en ligne n'est pas nécessaire pour le moment. C'est une contrainte de périmètre. |
+| US09 — Absence de vente en ligne            | Fidèle      | La présidente précise que la vente en ligne n'est pas nécessaire pour le moment. C'est une contrainte de périmètre. |
 
 # Questions à poser à la présidente — Projet Seconde Vie
 

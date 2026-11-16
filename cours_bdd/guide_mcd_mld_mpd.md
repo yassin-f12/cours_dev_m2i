@@ -58,7 +58,7 @@ Contenu :
 
 - Tables et colonnes
 - Clés primaires (PK)
-- Clés étrangères (FK)
+- Clés étrangères (FK) (toujours du coté du many)
 
 Exemple :
 

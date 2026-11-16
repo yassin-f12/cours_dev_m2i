@@ -5661,7 +5661,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGh5Ks3hniUrQQ="
 									},
-									"text": "0,N"
+									"text": "1,N"
 								}
 							],
 							"font": "Arial;13;0",
@@ -5750,7 +5750,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGh5KxY5XjEZDY="
 									},
-									"text": "0,N"
+									"text": "1,N"
 								}
 							],
 							"font": "Arial;13;0",
@@ -6487,11 +6487,11 @@
 								"_parent": {
 									"$ref": "AAAAAAGh5KxY5XjACho="
 								},
-								"name": "0,N",
+								"name": "1,N",
 								"reference": {
 									"$ref": "AAAAAAGh5J1SbnbWnRc="
 								},
-								"cardinality": "0..*"
+								"cardinality": "1..*"
 							}
 						},
 						{
@@ -6581,11 +6581,11 @@
 								"_parent": {
 									"$ref": "AAAAAAGh5Ks3hniQG8I="
 								},
-								"name": "0,N",
+								"name": "1,N",
 								"reference": {
 									"$ref": "AAAAAAGh5J1SbnbWnRc="
 								},
-								"cardinality": "0..*"
+								"cardinality": "1..*"
 							}
 						}
 					],

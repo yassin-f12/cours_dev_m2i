@@ -54,3 +54,29 @@ SELECT *
 FROM `country`
 WHERE GovernmentForm LIKE '%Territory%';
 ```
+
+### 7. Affichez le nombre de pays ayant le statut de république
+
+```sql
+SELECT COUNT(*)
+FROM `country`
+WHERE GovernmentForm = 'Republic';
+```
+
+### 8. Affichez le total de la population par continent
+
+```sql
+SELECT Continent, SUM(Population)
+FROM `country`
+GROUP BY Continent;
+```
+
+### 9. Affichez les 3 continents ayant la plus grande moyenne de population/pays (affichez également leur moyenne)
+
+```sql
+SELECT Continent, AVG(Population) AS moy_pop
+FROM `country`
+GROUP BY Continent
+ORDER BY moy_pop DESC
+LIMIT 3;
+```

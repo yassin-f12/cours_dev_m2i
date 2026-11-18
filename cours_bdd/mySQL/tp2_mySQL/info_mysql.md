@@ -40,6 +40,17 @@
 - OR : au moins une condition doit être vraie.
 - NOT : inverse une condition.
 
+## Jointures SQL (JOIN)
+
+- INNER JOIN : récupère uniquement les lignes qui possèdent une correspondance dans les deux tables.
+- LEFT JOIN : récupère toutes les lignes de la table de gauche, même sans correspondance dans la table de droite. Les colonnes sans correspondance prennent la valeur `NULL`.
+- RIGHT JOIN : récupère toutes les lignes de la table de droite, même sans correspondance dans la table de gauche. Les colonnes sans correspondance prennent la valeur `NULL`.
+- FULL OUTER JOIN : récupère toutes les lignes des deux tables, qu'elles aient une correspondance ou non (non pris en charge directement par MySQL).
+- CROSS JOIN : associe chaque ligne de la première table avec chaque ligne de la deuxième table.
+- ON : définit la condition de correspondance entre les deux tables.
+- USING : permet de faire une jointure en utilisant une colonne qui porte le même nom dans les deux tables.
+- SELF JOIN : permet de joindre une table avec elle-même.
+
 ## Autres éléments utiles
 
 - AS : donner un alias (nom personnalisé) à une colonne.

@@ -1,6 +1,6 @@
 # Exercices SQL
 
-## SELECT – Lire des données
+## SELECT – Lire des données (bdd world.sql)
 
 ### 1. Afficher toutes les colonnes des pays ayant une population supérieure à 100 millions d’habitants
 
@@ -79,4 +79,46 @@ FROM `country`
 GROUP BY Continent
 ORDER BY moy_pop DESC
 LIMIT 3;
+```
+
+## SELECT – Lire des données avec les jointures (bdd ecole.sql)
+
+### 10. Afficher la liste des élèves avec leur ville
+
+```sql
+SELECT etudiants.nom, ville.ville_nom
+FROM `etudiants`
+LEFT JOIN ville
+ON ville.ville_id = etudiants.id_ville;
+```
+
+### 11. Afficher tous les nom et prénom des étudiants et les noms des cours auxquels ils sont inscrits.
+
+```sql
+SELECT etudiants.nom, etudiants.prenom, cours.intitule
+FROM etudiants
+INNER JOIN inscriptions
+ON etudiants.id = inscriptions.etudiant_id
+INNER JOIN cours
+ON inscriptions.cours_id = cours.id;
+```
+
+### 12. Afficher les noms des cours qui n'ont pas d'étudiants inscrits.
+
+```sql
+SELECT cours.intitule
+FROM cours
+LEFT JOIN inscriptions ON cours.id = inscriptions.cours_id
+WHERE inscriptions.cours_id IS NULL;
+```
+
+### 13. Afficher tous les étudiants et les noms des cours auxquels ils sont inscrits ainsi que la ville rattachée à l’étudiant et la salle rattachée au cours. Afficher toutes les données à l’exception des ID. Les cours ne possédant pas encore de salle doivent également s’afficher !
+
+```sql
+SELECT etudiants.nom, etudiants.prenom, etudiants.age, cours.intitule, cours.professeur, ville.ville_nom, salles.nom
+FROM etudiants
+INNER JOIN inscriptions ON etudiants.id = inscriptions.etudiant_id
+INNER JOIN cours ON cours.id = inscriptions.cours_id
+LEFT JOIN ville ON ville.ville_id = etudiants.id_ville
+LEFT JOIN salles ON salles.id = cours.salle_id;
 ```

@@ -46,3 +46,11 @@ WHERE population BETWEEN 50000000 AND 90000000
   AND Continent != 'Africa'
   AND GovernmentForm IN ('Republic', 'Federal Republic');
 ```
+
+### 6. Affichez tous les pays contenant le mot Territory dans GovernementForm
+
+```sql
+SELECT *
+FROM `country`
+WHERE GovernmentForm LIKE '%Territory%';
+```

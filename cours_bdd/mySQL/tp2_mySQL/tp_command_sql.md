@@ -122,3 +122,50 @@ INNER JOIN cours ON cours.id = inscriptions.cours_id
 LEFT JOIN ville ON ville.ville_id = etudiants.id_ville
 LEFT JOIN salles ON salles.id = cours.salle_id;
 ```
+
+## CREATE, UPDATE, DELETE (bdd word.sql)
+
+### 14. Modifiez la population de la France à 50 000
+
+```sql
+UPDATE `country`
+SET Population = 50000
+WHERE code = 'FRA';
+```
+
+### 15. Modifiez la population de la France à 80 000 et sa superficie à 8 000
+
+```sql
+UPDATE country
+SET Population = 80000, SurfaceArea = 8000
+WHERE Code = 'FRA'
+```
+
+### 16. Modifiez la superficie à 10 000 de tous les pays ayant une superficie inférieure à ce nombre
+
+```sql
+UPDATE country
+SET SurfaceArea = 10000
+WHERE SurfaceArea < 10000;
+```
+
+### 17. Déplacez tous les pays en Antarctique
+
+```sql
+UPDATE `country`
+SET Continent = 'Antarctica';
+```
+
+### 18. Supprimez toutes les villes dont la population est supérieure à 10 000
+
+```sql
+DELETE FROM `city`
+WHERE Population > 10000;
+```
+
+### 19. Créez votre propre ville en France (CountryCode doit donc contenir FRA) en renseignant tous les champs
+
+```sql
+INSERT INTO city (`Name`, `CountryCode`, `District`, `Population`)
+VALUES ('BurgerCity', 'FRA', 'Steak', 1);
+```

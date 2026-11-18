@@ -65,3 +65,77 @@
 - HAVING filtre les groupes après le regroupement.
 - GROUP BY vient avant ORDER BY.
 - Les apostrophes ' ' servent à entourer les valeurs textuelles.
+
+## Fonctions scalaires SQL
+
+Les fonctions scalaires permettent de transformer une valeur et de retourner un résultat pour chaque ligne.
+
+**Fonctions sur les textes**
+
+- UPPER(texte) : convertir un texte en majuscules.
+- LOWER(texte) : convertir un texte en minuscules.
+- LENGTH(texte) : retourner la longueur d'un texte en octets.
+- CHAR_LENGTH(texte) : retourner le nombre de caractères.
+- CONCAT(texte1, texte2) : assembler plusieurs textes.
+- CONCAT_WS('séparateur', ...) : assembler plusieurs textes avec un séparateur.
+- SUBSTRING(texte, début, longueur) : extraire une partie d'un texte.
+- REPLACE(texte, ancien, nouveau) : remplacer une partie d'un texte.
+- TRIM(texte) : supprimer les espaces au début et à la fin.
+- LTRIM(texte) : supprimer les espaces au début.
+- RTRIM(texte) : supprimer les espaces à la fin.
+- LEFT(texte, nombre) : récupérer les caractères situés à gauche.
+- RIGHT(texte, nombre) : récupérer les caractères situés à droite.
+- REVERSE(texte) : inverser un texte.
+
+**Fonctions numériques**
+
+- ABS(nombre) : retourner la valeur absolue d'un nombre.
+- ROUND(nombre, décimales) : arrondir un nombre.
+- CEIL(nombre) : arrondir au nombre entier supérieur.
+- FLOOR(nombre) : arrondir au nombre entier inférieur.
+- TRUNCATE(nombre, décimales) : supprimer les décimales sans arrondir.
+- MOD(nombre1, nombre2) : retourner le reste d'une division.
+- POWER(nombre, puissance) : calculer une puissance.
+- SQRT(nombre) : calculer la racine carrée.
+- RAND() : générer un nombre aléatoire entre 0 et 1.
+
+**Fonctions sur les dates et heures**
+
+- NOW() : retourner la date et l'heure actuelles. (s'adapte au type de la colonne, time, datetime, date, year..)
+- CURDATE() : retourner la date actuelle.
+- CURTIME() : retourner l'heure actuelle.
+- YEAR(date) : récupérer l'année d'une date.
+- MONTH(date) : récupérer le mois d'une date.
+- DAY(date) : récupérer le jour du mois.
+- HOUR(heure) : récupérer les heures.
+- MINUTE(heure) : récupérer les minutes.
+- SECOND(heure) : récupérer les secondes.
+- DATEDIFF(date1, date2) : calculer le nombre de jours entre deux dates.
+- DATE_ADD(date, INTERVAL ...) : ajouter une durée à une date.
+- DATE_SUB(date, INTERVAL ...) : retirer une durée à une date.
+- DAYNAME(date) : retourner le nom du jour.
+- MONTHNAME(date) : retourner le nom du mois.
+
+**Fonctions de conversion**
+
+- CAST(valeur AS type) : convertir une valeur vers un autre type.
+- CONVERT(valeur, type) : convertir une valeur vers un autre type.
+
+**Fonctions de gestion des valeurs NULL**
+
+- IFNULL(valeur, remplacement) : remplacer une valeur NULL par une autre valeur.
+- COALESCE(valeur1, valeur2, ...) : retourner la première valeur qui n'est pas NULL.
+- NULLIF(valeur1, valeur2) : retourner NULL si les deux valeurs sont égales.
+
+**Fonctions conditionnelles**
+
+- IF(condition, valeur_si_vrai, valeur_si_faux) : retourner une valeur selon une condition.
+- CASE WHEN : effectuer plusieurs tests conditionnels et retourner un résultat selon le premier test vrai.
+
+## À retenir
+
+- Une fonction scalaire travaille sur une valeur et retourne un résultat pour chaque ligne.
+- Une fonction d'agrégation travaille sur plusieurs lignes pour produire un résultat global ou par groupe.
+- CONCAT() permet de regrouper plusieurs textes.
+- IFNULL() permet de remplacer les valeurs NULL.
+- CASE WHEN permet de créer des conditions directement dans une requête SQL.

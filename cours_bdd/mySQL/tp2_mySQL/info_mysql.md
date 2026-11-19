@@ -210,6 +210,14 @@ Les options ON DELETE définissent ce qui se passe lorsqu'une ligne référencé
 - ON DELETE RESTRICT : empêche la suppression si des lignes liées existent.
 - ON DELETE NO ACTION : empêche également la suppression si des lignes liées existent (comportement proche de RESTRICT dans MySQL).
 
+**Transactions SQL**
+
+Une transaction permet de regrouper plusieurs opérations SQL pour les valider ensemble ou les annuler.
+
+- START TRANSACTION; : commencer une transaction.
+- COMMIT; : valider définitivement les modifications.
+- ROLLBACK; : annuler les modifications effectuées depuis le début de la transaction.
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.

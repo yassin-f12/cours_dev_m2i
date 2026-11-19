@@ -140,7 +140,7 @@ Les fonctions scalaires permettent de transformer une valeur et de retourner un 
 - IFNULL() permet de remplacer les valeurs NULL.
 - CASE WHEN permet de créer des conditions directement dans une requête SQL.
 
-## Commandes MySQL (terminal : mysql -u root (rajoute -p si y a un mdp)
+## Commandes MySQL (terminal : mysql -u root (rajoute -p si y a un mdp))
 
 **Gestion des bases de données**
 
@@ -161,6 +161,25 @@ Les fonctions scalaires permettent de transformer une valeur et de retourner un 
 - DROP TABLE nom_table; : supprimer une table.
 - TRUNCATE TABLE nom_table; : supprimer toutes les données d'une table sans supprimer sa structure.
 - RENAME TABLE ancien_nom TO nouveau_nom; : renommer une table.
+- ALTER TABLE nom_table ADD colonne TYPE (TYPE => genre INT); : ajouter une nouvelle colonne.
+- ALTER TABLE nom_table DROP COLUMN colonne; : supprimer une colonne.
+- ALTER TABLE nom_table MODIFY colonne TYPE; : modifier le type ou les propriétés d'une colonne.
+- ALTER TABLE nom_table CHANGE ancien_nom nouveau_nom TYPE; : renommer une colonne et éventuellement modifier son type.
+- ALTER TABLE nom_table RENAME COLUMN ancien_nom TO nouveau_nom; : renommer une colonne.
+- ALTER TABLE nom_table RENAME TO nouveau_nom; : renommer une table.
+- ALTER TABLE nom_table ADD PRIMARY KEY (colonne); : ajouter une clé primaire.
+- ALTER TABLE nom_table DROP PRIMARY KEY; : supprimer une clé primaire.
+- ALTER TABLE nom_table ADD CONSTRAINT nom_contrainte FOREIGN KEY (colonne) REFERENCES autre_table(id); : ajouter une clé étrangère.
+
+**Contraintes SQL**
+
+- NOT NULL : interdit les valeurs NULL dans une colonne.
+- UNIQUE : interdit les doublons dans une colonne.
+- DEFAULT valeur : définit une valeur par défaut si aucune valeur n'est fournie.
+- CHECK (condition) : impose une condition aux valeurs d'une colonne.
+- PRIMARY KEY : définit la clé primaire d'une table.
+- FOREIGN KEY : définit une clé étrangère qui référence une autre table.
+- AUTO_INCREMENT : génère automatiquement un nouvel identifiant.
 
 **Informations sur MySQL**
 
@@ -182,6 +201,15 @@ Les fonctions scalaires permettent de transformer une valeur et de retourner un 
 - REVOKE ALL PRIVILEGES ON nom_base.* FROM 'nom'@'localhost'; : retirer les permissions sur une base.
 - DROP USER 'nom'@'localhost'; : supprimer un utilisateur.
 
+**Clés étrangères et suppression**
+
+Les options ON DELETE définissent ce qui se passe lorsqu'une ligne référencée est supprimée.
+
+- ON DELETE CASCADE : supprime automatiquement les lignes liées.
+- ON DELETE SET NULL : remplace la clé étrangère par NULL.
+- ON DELETE RESTRICT : empêche la suppression si des lignes liées existent.
+- ON DELETE NO ACTION : empêche également la suppression si des lignes liées existent (comportement proche de RESTRICT dans MySQL).
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.
@@ -190,6 +218,12 @@ Les fonctions scalaires permettent de transformer une valeur et de retourner un 
 - \q : quitter MySQL.
 - \G : afficher le résultat verticalement au lieu d'un tableau.
 - \s : afficher l'état de la connexion.
+- SELECT DISTINCT colonne FROM table; : affiche les valeurs sans doublons.
+- CREATE INDEX nom_index ON table (colonne); : crée un index pour accélérer certaines recherches.
+- DROP INDEX nom_index ON table; : supprime un index.
+- UNION : rassemble les résultats de plusieurs SELECT en supprimant les doublons.
+- UNION ALL : rassemble les résultats de plusieurs SELECT en conservant les doublons.
+- EXPLAIN SELECT ...; : affiche le plan d'exécution d'une requête.
 
 ## À retenir
 

@@ -218,6 +218,14 @@ Une transaction permet de regrouper plusieurs opérations SQL pour les valider e
 - COMMIT; : valider définitivement les modifications.
 - ROLLBACK; : annuler les modifications effectuées depuis le début de la transaction.
 
+**Requêtes préparées (Prepared Statements)**
+
+- PREPARE nom_requete FROM 'requête SQL'; : préparer une requête SQL.
+- ? : emplacement réservé à une valeur qui sera fournie plus tard.
+- SET @nom = valeur; : stocker une valeur dans une variable MySQL.
+- EXECUTE nom_requete USING @variable; : exécuter la requête avec la valeur de la variable.
+- DEALLOCATE PREPARE nom_requete; : supprimer la requête préparée. (tu peut aussi ecrire DROP a la place de DEALLOCATE)
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.

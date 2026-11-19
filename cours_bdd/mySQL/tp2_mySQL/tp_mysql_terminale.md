@@ -51,3 +51,49 @@ DELETE FROM inscriptions WHERE etudiant_id = 1 AND cours_id = 2;
 ```text
 COMMIT;
 ```
+
+## Les Requêtes préparées
+
+### 5. Utilisez une requête préparée pour sélectionner les étudiants qui ont un nom donné et les afficher puis supprimez la requête préparée.
+
+```text
+PREPARE rech_etudi FROM 'SELECT * FROM etudiants WHERE nom = ?';
+```
+
+```text
+SET @nom = 'Doe';
+```
+
+```text
+EXECUTE rech_etudi USING @nom;
+```
+
+```text
+DEALLOCATE PREPARE rech_etudi;
+```
+
+### 6. Créez une requête préparée et exécutez la deux fois de suite pour mettre à jour les informations de 2 étudiants. puis supprimez la requête préparée.
+
+```text
+PREPARE modif_age FROM 'UPDATE etudiants SET age = ? WHERE id = ?';
+```
+
+```text
+SET @age = 24, @id = 1;
+```
+
+```text
+EXECUTE modif_age USING @age, @id;
+```
+
+```text
+SET @age = 26, @id = 2;
+```
+
+```text
+EXECUTE modif_age USING @age, @id;
+```
+
+```text
+DEALLOCATE PREPARE modif_age;
+```

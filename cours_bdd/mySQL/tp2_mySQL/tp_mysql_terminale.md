@@ -97,3 +97,79 @@ EXECUTE modif_age USING @age, @id;
 ```text
 DEALLOCATE PREPARE modif_age;
 ```
+
+## Les Procédures stockées
+
+### 7. Créez une procédure stockée “ajouter_etudiant” qui prend deux paramètres, nom_etudiant et prenom_etudiant, et insère un nouvel étudiant dans la table étudiants.
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE PROCEDURE ajouter_etudiant (
+    -> IN nom_etudiant VARCHAR(50),
+    -> IN prenom_etudiant VARCHAR(50)
+    -> )
+    -> BEGIN
+    -> INSERT INTO etudiants (nom, prenom) VALUES (nom_etudiant, prenom_etudiant);
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+```text
+CALL ajouter_etudiant('Sam', 'Tom');
+```
+
+### 8. Créez une procédure stockée compter_etudiants_par_cours qui prend un paramètre id_cours (IN) et un paramètre nombre_etudiants (OUT), puis retourne le nombre d'étudiants inscrits à ce cours.
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE PROCEDURE compter_etudiants_par_cours (
+    -> IN id_cours INT,
+    -> OUT nombre_etudiants INT
+    -> )
+    -> BEGIN
+    -> SELECT COUNT(*) INTO nombre_etudiants FROM inscriptions WHERE cours_id = id_cours;
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+```text
+CALL compter_etudiants_par_cours(1, @nombre);
+```
+
+```text
+SELECT @nombre;
+```
+
+```text
+DROP PROCEDURE compter_etudiants_par_cours;
+```
+
+### 9. Créez une procédure stockée changer_etudiant_cours qui prend deux paramètres, id_etudiant (IN) et ancien_cours_id (INOUT), désinscrit l'étudiant de l'ancien cours et l'inscrit à un nouveau cours dont l'ID est égal à l'ancien ID du cours + 1.
+
+```text
+CREATE PROCEDURE changer_etudiant_cours (
+    -> IN id_etudant INT,
+    -> INOUT ancien_cours_id INT
+    -> )
+    -> BEGIN
+    -> DELETE FROM inscriptions WHERE etudiant_id = id_etudant AND cours_id = ancien_cours_id;
+    -> SET ancien_cours_id = ancien_cours_id + 1;
+    -> INSERT INTO inscriptions (etudiant_id, cours_id) VALUES (id_etudant, ancien_cours_id);
+    -> END //
+```
+
+```text
+CALL changer_etudiant_cours(4, @nouveau_cours);
+```

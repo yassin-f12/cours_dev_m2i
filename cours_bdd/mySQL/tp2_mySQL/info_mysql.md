@@ -226,6 +226,35 @@ Une transaction permet de regrouper plusieurs opérations SQL pour les valider e
 - EXECUTE nom_requete USING @variable; : exécuter la requête avec la valeur de la variable.
 - DEALLOCATE PREPARE nom_requete; : supprimer la requête préparée. (tu peut aussi ecrire DROP a la place de DEALLOCATE)
 
+**Procédures stockées (Stored Procedures)**
+
+Une procédure stockée est un ensemble d'instructions SQL enregistré dans MySQL et réutilisable grâce à son nom.
+
+**Création :**
+
+- CREATE PROCEDURE nom_procedure(...) : créer une procédure stockée.
+- BEGIN : début du contenu de la procédure.
+- END : fin du contenu de la procédure.
+- CALL nom_procedure(...) : exécuter une procédure stockée.
+- DROP PROCEDURE nom_procedure; : supprimer une procédure stockée.
+
+**Paramètres :**
+
+- IN nom TYPE : recevoir une valeur en entrée.
+- OUT nom TYPE : retourner une valeur en sortie.
+- INOUT nom TYPE : recevoir une valeur, la modifier et retourner le résultat.
+
+**Délimiteurs (DELIMITER) :**
+
+- DELIMITER // : remplacer temporairement le délimiteur ; par //.
+- DELIMITER ; : remettre le délimiteur habituel.
+- Permet d'utiliser des ; à l'intérieur d'une procédure sans arrêter sa création prématurément.
+
+**Commandes pour consulter les procédures stockées :**
+
+- SHOW PROCEDURE STATUS WHERE Db = 'nom_base'; : afficher la liste des procédures stockées d'une base de données.
+- SHOW CREATE PROCEDURE nom_procedure; : afficher le code complet d'une procédure stockée précise.
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.

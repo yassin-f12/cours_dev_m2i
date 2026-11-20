@@ -225,3 +225,95 @@ DELIMITER ;
 ```text
 SELECT nom_complet_etudiant(4);
 ```
+
+## Les Triggers (Déclencheurs)
+
+### 12. Créez un déclencheur (Trigger) sur la table inscriptions pour ajouter un enregistrement dans la table historique_inscriptions avant qu’un étudiant s'inscrive à un cours.
+
+---> Il faut avant créer une table, et lui ajouter les PK et FK la consigne : Créez une nouvelle table historique_inscriptions avec les colonnes suivantes : id, etudiant_id, cours_id, action (pour suivre l'action effectuée, comme 'ajout' ou 'suppression') et date_action (pour enregistrer la date et l'heure de l'action). :
+
+```text
+CREATE TABLE historique_inscriptions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    etudiant_id INT,
+    cours_id INT,
+    action VARCHAR(50),
+    date_action DATETIME
+);
+```
+
+```text
+ALTER TABLE historique_inscriptions
+ADD CONSTRAINT fk_historique_etudiant
+FOREIGN KEY (etudiant_id)
+REFERENCES etudiants(id);
+```
+
+```text
+ALTER TABLE historique_inscriptions
+ADD CONSTRAINT fk_historique_cours
+FOREIGN KEY (cours_id)
+REFERENCES cours(id);
+```
+
+---> Le TRIGGER :
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE TRIGGER avant_ajout_etudiant
+    -> BEFORE INSERT ON inscriptions
+    -> FOR EACH ROW
+    -> BEGIN
+    -> INSERT INTO historique_inscriptions (etudiant_id, cours_id, action, date_action)
+    -> VALUES (NEW.etudiant_id, NEW.cours_id, 'ajout', NOW());
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+---> Tester le trigger :
+
+```text
+INSERT INTO inscriptions (etudiant_id, cours_id)
+VALUES (5, 1);
+```
+
+```text
+SELECT * FROM historique_inscriptions;
+```
+
+### 13. Créez un déclencheur (Trigger) sur la table inscriptions pour ajouter un enregistrement dans la table historique_inscriptions avant qu’un étudiant se désinscrit d'un cours.
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE TRIGGER apres_suppr_etudiant
+    -> BEFORE DELETE ON inscriptions
+    -> FOR EACH ROW
+    -> BEGIN
+    -> INSERT INTO historique_inscriptions (etudiant_id, cours_id, action, date_action)
+    -> VALUES (OLD.etudiant_id, OLD.cours_id, 'suppression', NOW());
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+---> Tester le trigger :
+
+```text
+DELETE FROM inscriptions
+WHERE etudiant_id = 5 AND cours_id = 1;
+```
+
+```text
+SELECT * FROM historique_inscriptions;
+```

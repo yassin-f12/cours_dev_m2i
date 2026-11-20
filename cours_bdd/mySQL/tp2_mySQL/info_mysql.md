@@ -291,6 +291,37 @@ Une fonction stockée est un ensemble d'instructions SQL enregistré dans MySQL.
 - Fonction intégrée : déjà fournie par MySQL (COUNT, CONCAT, UPPER...).
 - Fonction stockée : créée par le développeur avec CREATE FUNCTION.
 
+**Triggers (Déclencheurs)**
+
+Un trigger est un ensemble d'instructions SQL qui s'exécute automatiquement lorsqu'un événement précis se produit sur une table.
+
+**Création :**
+
+- CREATE TRIGGER nom_trigger : créer un trigger.
+- BEFORE : exécuter le trigger avant l'événement.
+- AFTER : exécuter le trigger après l'événement.
+- INSERT : événement déclenché lors de l'insertion d'une ligne.
+- UPDATE : événement déclenché lors de la modification d'une ligne.
+- DELETE : événement déclenché lors de la suppression d'une ligne.
+- ON nom_table : préciser la table concernée par le trigger.
+- FOR EACH ROW : exécuter le trigger pour chaque ligne concernée.
+- BEGIN : début du contenu du trigger.
+- END : fin du contenu du trigger.
+- DROP TRIGGER nom_trigger; : supprimer un trigger.
+
+**Accès aux données :**
+
+- NEW : accéder aux nouvelles valeurs d'une ligne lors d'un INSERT ou d'un UPDATE.
+- OLD : accéder aux anciennes valeurs d'une ligne lors d'un UPDATE ou d'un DELETE.
+
+**À retenir :**
+
+- Un trigger s'exécute automatiquement, contrairement à une procédure stockée qui doit être appelée avec CALL.
+- BEFORE : permet d'effectuer un traitement avant l'événement.
+- AFTER : permet d'effectuer un traitement après l'événement.
+- Un trigger est associé à une table et à un événement (INSERT, UPDATE ou DELETE).
+- FOR EACH ROW : un trigger MySQL s'exécute pour chaque ligne concernée par l'événement.
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.

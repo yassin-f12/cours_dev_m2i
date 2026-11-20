@@ -173,3 +173,55 @@ CREATE PROCEDURE changer_etudiant_cours (
 ```text
 CALL changer_etudiant_cours(4, @nouveau_cours);
 ```
+
+## Les Fonctions stockées
+
+### 10. Créez une fonction nombre_etudiants_cours qui prend un paramètre id_cours et retourne le nombre d'étudiants inscrits à ce cours.
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE FUNCTION nombre_etudiants_cours (
+    -> id_cours INT)
+    -> RETURNS INT
+    -> NOT DETERMINISTIC
+    -> READS SQL DATA
+    -> BEGIN
+    -> RETURN (SELECT COUNT(*) FROM inscriptions WHERE cours_id = id_cours);
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+```text
+SELECT nombre_etudiants_cours(1);
+```
+
+### 11. Créez une fonction nom_complet_etudiant qui prend un paramètre id_etudiant et retourne le nom complet (prénom et nom) de l'étudiant.
+
+```text
+DELIMITER //
+```
+
+```text
+CREATE FUNCTION nom_complet_etudiant (
+    -> id_etudiant INT)
+    -> RETURNS VARCHAR(50)
+    -> NOT DETERMINISTIC
+    -> READS SQL DATA
+    -> BEGIN
+    -> RETURN (SELECT CONCAT(prenom,' ', nom) FROM etudiants WHERE id_etudiant = etudiants.id);
+    -> END //
+```
+
+```text
+DELIMITER ;
+```
+
+```text
+SELECT nom_complet_etudiant(4);
+```

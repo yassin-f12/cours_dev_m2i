@@ -255,6 +255,42 @@ Une procédure stockée est un ensemble d'instructions SQL enregistré dans MySQ
 - SHOW PROCEDURE STATUS WHERE Db = 'nom_base'; : afficher la liste des procédures stockées d'une base de données.
 - SHOW CREATE PROCEDURE nom_procedure; : afficher le code complet d'une procédure stockée précise.
 
+**Fonctions stockées (Stored Functions)**
+
+Une fonction stockée est un ensemble d'instructions SQL enregistré dans MySQL. Elle permet d'effectuer un traitement et de retourner une valeur.
+
+**Création :**
+
+- CREATE FUNCTION nom_fonction(...) : créer une fonction stockée.
+- RETURNS type : définir le type de valeur retournée par la fonction.
+- RETURN valeur : retourner le résultat de la fonction.
+- DETERMINISTIC : indiquer que la fonction retourne toujours le même résultat pour les mêmes paramètres.
+- NOT DETERMINISTIC : indique que le résultat peut varier pour les mêmes paramètres.
+- READS SQL DATA : indique que la fonction lit des données dans des tables sans les modifier. (peut causer des erreur 1418 si il est pas mit)
+- MODIFIES SQL DATA : indique que la fonction peut modifier des données dans des tables.
+- NO SQL : indique que la fonction n'exécute aucune instruction SQL.
+- BEGIN : début du contenu de la fonction.
+- END : fin du contenu de la fonction.
+- DROP FUNCTION nom_fonction; : supprimer une fonction stockée.
+
+**Utilisation :**
+
+- Une fonction stockée s'appelle directement dans une requête SQL, notamment avec SELECT.
+- Elle peut être utilisée dans une expression ou une condition SQL.
+- Une fonction doit obligatoirement retourner une valeur avec RETURN.
+- RETURNS définit le type de la valeur retournée (INT, VARCHAR, DECIMAL, etc.).
+
+**Paramètres :**
+
+- Les paramètres d'une fonction sont uniquement des paramètres d'entrée.
+- Contrairement aux procédures, une fonction ne possède pas de paramètres OUT ou INOUT.
+- Une fonction peut recevoir plusieurs paramètres ou aucun.
+
+**Différence avec une fonction intégrée :**
+
+- Fonction intégrée : déjà fournie par MySQL (COUNT, CONCAT, UPPER...).
+- Fonction stockée : créée par le développeur avec CREATE FUNCTION.
+
 **Commandes utiles dans le terminal MySQL**
 
 - \help : afficher l'aide MySQL.

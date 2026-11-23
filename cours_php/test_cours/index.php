@@ -1,7 +1,12 @@
 <?php
 $prenom = "Alves";
+$age = 32;
 
+
+var_dump($age);
 var_dump($prenom);
+
+$html = "<p>Nom : $prenom  <br>Age : $age</p>";
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +26,15 @@ var_dump($prenom);
   ?>
 
   <?= "<h1>Hello $prenom</h1>"; ?>
+
+  <?= "Nom : " . $prenom . "<br>Age :" . $age // OK
+  ?><br>
+  <?= "Nom : $prenom  <br>Age : $age" // OK
+  ?>
+  <?= $html // OK
+  ?><br>
+  <?= 'Nom : $prenom  <br>Age : $age' // FAUX
+  ?>
 
 </body>
 

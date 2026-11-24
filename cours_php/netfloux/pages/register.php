@@ -1,10 +1,40 @@
 <?php
+const PASSWORD_MIN_LENGTH = 8;
+
+if (isset($_POST["pseudo"])) {
+  $pseudo = $_POST["pseudo"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  if (empty($pseudo) || empty($email) || empty($password)) {
+    $alertError = "Merci de remplir tous les champ";
+  } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    $alertError = "Merci de renseigner une adresse email valide.";
+  } elseif (mb_strlen($password) < PASSWORD_MIN_LENGTH) {
+    $alertError = "Le mot de passe doit contenir au moins " . PASSWORD_MIN_LENGTH . "caractères !";
+  } else {
+    try {
+      $request = $db->prepare("SELECT * FROM user WHERE user_email = ? OR pseudo = ?");
+      $request->execute([$email, $password]);
+      $user = $request->fetch();
+
+      if ($user) {
+        $alertError = "Un compte existe déjà avec ce pseudo ou email !";
+      } else {
+        $id = bin2hex(random_bytes(4)); // va générer 8 caractères 
+      }
+    } catch (PDOException $e) {
+      echo 'Erreur : ' . $e->getMessage();
+    }
+  }
+}
+
 require 'partials/alert.php';
 ?>
 
 <h1 class="mb-4">Création de compte</h1>
 
-<form action="?page=register" method="POST">
+<form action="?page=register" method="post">
 
 
   <div class="row justify-content-center">

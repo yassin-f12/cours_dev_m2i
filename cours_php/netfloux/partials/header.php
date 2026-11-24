@@ -26,10 +26,17 @@
           <li class="nav-item">
             <a class="nav-link <?= $page === 'list' ? 'active' : '' ?>" href="?page=list">Liste</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link <?= $page === 'register' ? 'active' : '' ?>" href="?page=register">
-              Inscription
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compte
             </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Connexion</a>
+              <a class="dropdown-item" <?= $page === 'register' ? 'active' : '' ?> href="?page=register">Création de compte</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Déconnexion</a>
+            </div>
           </li>
         </ul>
 

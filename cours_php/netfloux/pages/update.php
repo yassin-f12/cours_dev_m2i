@@ -1,92 +1,85 @@
 <?php
-
 $id = $_GET['id'] ?? null;
+$movie = null;
 $categories = [];
 $formValues = [];
 
-if (!$id || !filter_var($id, FILTER_VALIDATE_INT)) {
-  $alertError = "Identifiant du film invalide.";
-} else {
-  try {
-    $request = $db->prepare("SELECT * FROM movie WHERE id = ?");
-    $request->execute([$id]);
-    $movie = $request->fetch();
-
-    if (!$movie) {
-      $alertError = "Film introuvable.";
-    } else {
-      $request = $db->query("SELECT * FROM category ORDER BY cat_name ASC");
-      $categories = $request->fetchAll();
-
-      $timeParts = explode(':', $movie['movie_time'] ?? '00:00:00');
-
-      $formValues = [
-        'title' => $movie['title'],
-        'year' => $movie['movie_year'],
-        'time' => ((int)$timeParts[0] * 60) + (int)$timeParts[1],
-        'id_category' => $movie['id_category'],
-        'summary' => $movie['summary'],
-        'picture' => $movie['picture'],
-        'trailer' => $movie['trailer']
-      ];
-
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $formValues = $_POST;
-
-        if (empty($formValues['title']) || empty($formValues['id_category'])) {
-          $alertError = "Veuillez remplir le titre et la catégorie.";
-        } else {
-          try {
-            $time = null;
-
-            if ($formValues['time'] !== '') {
-              $hours = intdiv((int)$formValues['time'], 60);
-              $minutes = (int)$formValues['time'] % 60;
-              $time = sprintf('%02d:%02d:00', $hours, $minutes);
-            }
-
-            $year = $formValues['year'] !== '' ? $formValues['year'] : null;
-            $summary = $formValues['summary'] !== '' ? $formValues['summary'] : null;
-            $picture = $formValues['picture'] !== '' ? $formValues['picture'] : null;
-            $trailer = $formValues['trailer'] !== '' ? $formValues['trailer'] : null;
-
-            $request = $db->prepare("
-                            UPDATE movie
-                            SET title = ?,
-                                summary = ?,
-                                movie_year = ?,
-                                movie_time = ?,
-                                trailer = ?,
-                                picture = ?,
-                                id_category = ?
-                            WHERE id = ?
-                        ");
-
-            $request->execute([
-              $formValues['title'],
-              $summary,
-              $year,
-              $time,
-              $trailer,
-              $picture,
-              $formValues['id_category'],
-              $id
-            ]);
-
-            $_SESSION['alertSuccess'] = "Le film a bien été modifié.";
-
-            header('Location: ?page=list');
-            exit;
-          } catch (PDOException $e) {
-            $alertError = "Impossible de modifier ce film.";
-          }
-        }
-      }
-    }
-  } catch (PDOException $e) {
-    $alertError = "Impossible de récupérer les informations du film.";
+try {
+  if (!$id || !filter_var($id, FILTER_VALIDATE_INT)) {
+    throw new Exception("Identifiant du film invalide.");
   }
+
+  $request = $db->prepare("SELECT * FROM movie WHERE id = ?");
+  $request->execute([$id]);
+  $movie = $request->fetch();
+
+  if (!$movie) {
+    throw new Exception("Film introuvable.");
+  }
+
+  $request = $db->query("SELECT * FROM category ORDER BY cat_name ASC");
+  $categories = $request->fetchAll();
+
+  $timeParts = explode(':', $movie['movie_time'] ?? '00:00:00');
+
+  $formValues = [
+    'title' => $movie['title'],
+    'year' => $movie['movie_year'],
+    'time' => ((int)$timeParts[0] * 60) + (int)$timeParts[1],
+    'id_category' => $movie['id_category'],
+    'summary' => $movie['summary'],
+    'picture' => $movie['picture'],
+    'trailer' => $movie['trailer']
+  ];
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $formValues = array_merge($formValues, $_POST);
+
+    if (empty($formValues['title']) || empty($formValues['id_category'])) {
+      throw new Exception("Veuillez remplir le titre et la catégorie.");
+    }
+
+    $time = null;
+
+    if ($formValues['time'] !== '') {
+      $hours = intdiv((int)$formValues['time'], 60);
+      $minutes = (int)$formValues['time'] % 60;
+      $time = sprintf('%02d:%02d:00', $hours, $minutes);
+    }
+
+    $request = $db->prepare("
+            UPDATE movie
+            SET title = ?,
+                summary = ?,
+                movie_year = ?,
+                movie_time = ?,
+                trailer = ?,
+                picture = ?,
+                id_category = ?
+            WHERE id = ?
+        ");
+
+    $request->execute([
+      $formValues['title'],
+      $formValues['summary'] ?: null,
+      $formValues['year'] ?: null,
+      $time,
+      $formValues['trailer'] ?: null,
+      $formValues['picture'] ?: null,
+      $formValues['id_category'],
+      $id
+    ]);
+
+    $_SESSION['alertSuccess'] = "Le film a bien été modifié.";
+
+    header('Location: ?page=list');
+    exit;
+  }
+} catch (PDOException $e) {
+  $alertError = "Une erreur est survenue lors du traitement du film.";
+} catch (Exception $e) {
+  $alertError = $e->getMessage();
 }
 
 require 'partials/alert.php';

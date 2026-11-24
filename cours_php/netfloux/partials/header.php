@@ -26,6 +26,11 @@
           <li class="nav-item">
             <a class="nav-link <?= $page === 'list' ? 'active' : '' ?>" href="?page=list">Liste</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link <?= $page === 'register' ? 'active' : '' ?>" href="?page=register">
+              Inscription
+            </a>
+          </li>
         </ul>
 
         <form class="form-inline my-2 my-lg-0">

@@ -7,6 +7,8 @@ $page = $_GET['page'] ?? 'home';
 
 require_once 'partials/header.php';
 
+$alertError = null;
+$alertSuccess = null;
 
 switch ($page) {
   case 'home':
@@ -23,6 +25,22 @@ switch ($page) {
 
   case 'details':
     require 'pages/details.php';
+    break;
+
+  case 'update':
+    require 'pages/update.php';
+    break;
+
+  case 'delete':
+    require 'pages/delete.php';
+    break;
+
+  case 'register':
+    require 'pages/register.php';
+    break;
+
+  case 'login':
+    require 'pages/login.php';
     break;
 
   default:

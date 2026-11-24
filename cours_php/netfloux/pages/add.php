@@ -1,18 +1,56 @@
 <?php
+if (isset($_POST['title'])) {
+  $title = $_POST['title'];
+  $summary = $_POST['summary'];
+  $year = $_POST['year'];
+  $time = $_POST['time'];
+  $trailer = $_POST['trailer'];
+  $picture = $_POST['picture'];
+  $category = $_POST['category'];
+
+  if (empty($title) || empty($summary) || empty($year) || empty($time) || empty($picture) || empty($trailer) || empty($category)) {
+    $alertError = "Veuillez remplir tous les champs du formulaire";
+  } else {
+    // Conversion des minutes en format TIME pour MySQL (pour le champ durée du film)
+    $hours = intdiv($time, 60);
+    $minutes = $time % 60;
+    $time = sprintf('%02d:%02d:00', $hours, $minutes);
+
+    try {
+      $request = $db->prepare('INSERT INTO movie (title, summary, movie_year, movie_time, trailer, picture, id_category) VALUES (?, ?, ?, ?, ?, ?, ?)');
+      $request->execute([
+        $title,
+        $summary,
+        $year,
+        $time,
+        $trailer,
+        $picture,
+        $category
+      ]);
+      $alertSuccess = "Votre film $title a bien été ajouté !";
+    } catch (PDOException $e) {
+      echo 'Erreur :' . $e->getMessage();
+      $alertError = "Une erreur est survenue lors de l'ajout de votre film.";
+    }
+  }
+}
+
 $categories = [];
 try {
   $request = $db->query("SELECT * FROM category");
   $categories = $request->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
   echo 'Erreur :' . $e->getMessage();
+  $alertError = "Impossible de récupérer les categories pour le moment.";
 }
 
-?>
 
+require_once 'partials/alert.php';
+?>
 
 <h1>Ajouter un film</h1>
 
-<form class="form-film">
+<form class="form-film" action="" method="post">
   <div class="form-group">
     <label for="title">Titre du film *</label>
     <input
@@ -56,7 +94,7 @@ try {
     <select
       class="form-control"
       id="category"
-      name="id_category"
+      name="category"
       required>
       <option value="">Choisir une catégorie</option>
       <?php foreach ($categories as $cat) { ?>

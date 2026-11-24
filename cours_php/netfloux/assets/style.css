@@ -1,0 +1,22 @@
+.form-film {
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 30px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-film label {
+  font-weight: 600;
+  color: #343a40;
+}
+
+.form-film .form-control {
+  font-size: 14px;
+}
+
+.form-film .form-group {
+  margin-bottom: 18px;
+}

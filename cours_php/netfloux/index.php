@@ -1,10 +1,12 @@
 
 <?php
-
+require_once 'bdd.php';
 require_once 'partials/head.php';
-require_once 'partials/header.php';
 
 $page = $_GET['page'] ?? 'home';
+
+require_once 'partials/header.php';
+
 
 switch ($page) {
   case 'home':

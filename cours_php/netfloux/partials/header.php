@@ -1,3 +1,8 @@
+<?php
+
+/** @var string $page */
+?>
+
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -11,15 +16,15 @@
 
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="?page=home">Home</a>
+            <a class="nav-link <?= $page === 'home' ? 'active' : '' ?>" href="?page=home">Accueil</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="?page=add">Ajouter</a>
+            <a class="nav-link <?= $page === 'add' ? 'active' : '' ?>" href="?page=add">Ajouter</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="?page=list">List</a>
+            <a class="nav-link <?= $page === 'list' ? 'active' : '' ?>" href="?page=list">Liste</a>
           </li>
         </ul>
 

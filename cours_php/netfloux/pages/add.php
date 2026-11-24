@@ -1,3 +1,15 @@
+<?php
+$categories = [];
+try {
+  $request = $db->query("SELECT * FROM category");
+  $categories = $request->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+  echo 'Erreur :' . $e->getMessage();
+}
+
+?>
+
+
 <h1>Ajouter un film</h1>
 
 <form class="form-film">
@@ -47,6 +59,11 @@
       name="id_category"
       required>
       <option value="">Choisir une catégorie</option>
+      <?php foreach ($categories as $cat) { ?>
+        <option value="<?= $cat['id'] ?>">
+          <?= $cat['cat_name'] ?>
+        </option>
+      <?php } ?>
     </select>
   </div>
 

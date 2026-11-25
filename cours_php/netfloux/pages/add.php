@@ -44,7 +44,7 @@ if (isset($_POST['title'])) {
         } elseif (file_exists($targetFile)) {
           $alertError = "Un fichier du même nom existe déjà.";
         } elseif (move_uploaded_file($_FILES["picture"]["tmp_name"], $targetFile)) {
-          $file = $targetFile;
+          $file = $fileName;
         } else {
           $alertError = "Une erreur est survenue lors de l'envoi de votre image.";
         }
@@ -64,6 +64,9 @@ if (isset($_POST['title'])) {
         $alertSuccess = "Votre film $title a bien été ajouté !";
       }
     } catch (PDOException $e) {
+      if (!empty($file) && file_exists("public/picture/" . $file)) {
+        unlink("public/picture/" . $file);
+      }
       echo 'Erreur :' . $e->getMessage();
       $alertError = "Une erreur est survenue lors de l'ajout de votre film.";
     }

@@ -48,8 +48,7 @@ require 'partials/alert.php';
 
         <div class="card h-100 position-relative">
 
-          <img
-            src="<?= htmlspecialchars($movie['picture']) ?>"
+          <img src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
             class="card-img-top"
             alt="<?= $movie['title'] ?>"
             style="height: 190px; object-fit: cover;">

@@ -65,7 +65,7 @@ try {
       } elseif (file_exists($targetFile)) {
         throw new Exception("Un fichier du même nom existe déjà.");
       } elseif (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile)) {
-        $file = $targetFile;
+        $file = $fileName;
       } else {
         throw new Exception("Une erreur est survenue lors de l'envoi de votre image.");
       }
@@ -103,9 +103,10 @@ try {
     ]);
 
     $oldPicture = $movie['picture'];
+    $oldFile = "public/picture/" . $oldPicture;
 
-    if ($file !== $oldPicture && !empty($oldPicture) && file_exists($oldPicture)) {
-      unlink($oldPicture);
+    if ($file !== $oldPicture && !empty($oldPicture) && file_exists($oldFile)) {
+      unlink($oldFile);
     }
 
     $_SESSION['alertSuccess'] = "Le film a bien été modifié.";
@@ -188,7 +189,7 @@ require 'partials/alert.php';
       <?php if (!empty($movie['picture'])) { ?>
         <div class="mb-2">
           <img
-            src="<?= htmlspecialchars($movie['picture']) ?>"
+            src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
             alt="Affiche actuelle"
             style="width: 120px; height: 160px; object-fit: cover;">
         </div>

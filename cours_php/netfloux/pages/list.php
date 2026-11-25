@@ -15,10 +15,13 @@ $status = $_GET['status'] ?? '';
 $sort = $_GET['sort'] ?? 'title_asc';
 
 try {
+
   $categories = $db->query("
-    SELECT * FROM category
-    ORDER BY cat_name ASC
-  ")->fetchAll();
+  SELECT *
+  FROM category
+  WHERE category_is_archived = 0
+  ORDER BY cat_name ASC
+")->fetchAll();
 
   $request = "
     SELECT movie.*, category.cat_name

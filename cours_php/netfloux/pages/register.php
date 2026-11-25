@@ -35,6 +35,7 @@ if (isset($_POST["pseudo"])) {
         $_SESSION["user"] = [
           "id" => $id,
           "pseudo" => $pseudo,
+          "user_is_admin" => 0
         ];
 
         header('Location: ?page=list');

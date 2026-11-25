@@ -26,7 +26,14 @@ try {
     throw new Exception("Film introuvable.");
   }
 
-  $request = $db->query("SELECT * FROM category ORDER BY cat_name ASC");
+  $request = $db->prepare("
+    SELECT *
+    FROM category
+    WHERE category_is_archived = 0 OR id = ?
+    ORDER BY cat_name ASC
+  ");
+
+  $request->execute([$movie['id_category']]);
   $categories = $request->fetchAll();
 
   $timeParts = explode(':', $movie['movie_time'] ?? '00:00:00');

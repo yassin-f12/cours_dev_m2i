@@ -79,8 +79,14 @@ if (isset($_POST['title'])) {
 
 $categories = [];
 try {
-  $request = $db->query("SELECT * FROM category");
-  $categories = $request->fetchAll(PDO::FETCH_ASSOC);
+  $request = $db->query("
+  SELECT *
+  FROM category
+  WHERE category_is_archived = 0
+  ORDER BY cat_name ASC
+");
+
+  $categories = $request->fetchAll();
 } catch (PDOException $e) {
   echo 'Erreur :' . $e->getMessage();
   $alertError = "Impossible de récupérer les categories pour le moment.";

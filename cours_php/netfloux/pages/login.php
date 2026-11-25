@@ -21,6 +21,7 @@ if (isset($_POST['email'])) {
         $_SESSION["user"] = [
           "id" => $user['id'],
           "pseudo" => $user['pseudo'],
+          "user_is_admin" => $user['user_is_admin']
         ];
 
         header('Location: ?page=list');

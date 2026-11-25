@@ -1,8 +1,3 @@
-<?php
-
-/** @var string $page */
-?>
-
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -26,6 +21,14 @@
           <li class="nav-item">
             <a class="nav-link <?= $page === 'list' ? 'active' : '' ?>" href="?page=list">Liste</a>
           </li>
+
+          <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_is_admin'] === 1) { ?>
+            <li class="nav-item">
+              <a class="nav-link <?= $page === 'category' ? 'active' : '' ?>" href="?page=category">
+                Catégories
+              </a>
+            </li>
+          <?php } ?>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

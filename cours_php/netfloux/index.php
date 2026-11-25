@@ -12,10 +12,17 @@ if (isset($_GET['logout'])) {
 }
 
 require_once 'bdd.php';
-require_once 'partials/head.php';
 
 $page = $_GET['page'] ?? 'home';
 
+if ($page === 'category') {
+  if (!isset($_SESSION['user']) || $_SESSION['user']['user_is_admin'] !== 1) {
+    header('Location: ?page=home');
+    exit;
+  }
+}
+
+require_once 'partials/head.php';
 require_once 'partials/header.php';
 
 $alertError = null;
@@ -32,6 +39,10 @@ switch ($page) {
 
   case 'list':
     require 'pages/list.php';
+    break;
+
+  case 'category':
+    require 'pages/category.php';
     break;
 
   case 'details':

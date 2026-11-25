@@ -1,4 +1,5 @@
 <?php
+isset($_SESSION['user']);
 
 $movies = [];
 $nbrMovies = 0;
@@ -71,15 +72,15 @@ require 'partials/alert.php';
                 <?= !empty(htmlspecialchars($movie['movie_time'])) ? substr(htmlspecialchars($movie['movie_time']), 0, 5) : 'Durée inconnue' ?>
               </small>
             </p>
-
-            <a
-              href="?page=update&id=<?= $movie['id'] ?>"
-              class="btn btn-light position-absolute"
-              style="top: 10px; right: 10px; z-index: 1;"
-              title="Modifier le film">
-              <i class="fa-solid fa-pen"></i>
-            </a>
-
+            <?php if (isset($_SESSION['user'])) { ?>
+              <a
+                href="?page=update&id=<?= $movie['id'] ?>"
+                class="btn btn-light position-absolute"
+                style="top: 10px; right: 10px; z-index: 1;"
+                title="Modifier le film">
+                <i class="fa-solid fa-pen"></i>
+              </a>
+            <?php } ?>
             <div class="d-flex justify-content-between">
               <a href="?page=details&id=<?= $movie['id'] ?>" class="btn btn-primary">
                 Voir détails
@@ -91,12 +92,14 @@ require 'partials/alert.php';
                 </a>
               <?php } ?>
 
-              <form action="?page=delete" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
-                <input type="hidden" name="id" value="<?= $movie['id'] ?>">
-                <button type="submit" class="btn btn-danger">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </form>
+              <?php if (isset($_SESSION['user'])) { ?>
+                <form action="?page=delete" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
+                  <input type="hidden" name="id" value="<?= $movie['id'] ?>">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              <?php } ?>
             </div>
 
 

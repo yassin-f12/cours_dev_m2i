@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['user'])) {
+  header('Location: ?page=login');
+  exit;
+}
+
 if (isset($_POST['title'])) {
   $title = $_POST['title'];
   $summary = $_POST['summary'];
@@ -43,7 +48,6 @@ try {
   echo 'Erreur :' . $e->getMessage();
   $alertError = "Impossible de récupérer les categories pour le moment.";
 }
-
 
 require_once 'partials/alert.php';
 ?>

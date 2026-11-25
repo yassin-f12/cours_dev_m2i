@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['user'])) {
+  header('Location: ?page=login');
+  exit;
+}
+
 if (isset($_POST['id'])) {
   try {
     $request = $db->prepare("DELETE FROM movie WHERE id = ?");

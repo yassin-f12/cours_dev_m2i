@@ -33,7 +33,7 @@ if (isset($_POST["pseudo"])) {
           "pseudo" => $pseudo,
         ];
 
-        header('Location : ?page=list');
+        header('Location: ?page=list');
         exit;
       }
     } catch (PDOException $e) {
@@ -44,8 +44,6 @@ if (isset($_POST["pseudo"])) {
 
 require 'partials/alert.php';
 ?>
-
-<h1 class="mb-4">Création de compte</h1>
 
 <form action="?page=register" method="post">
 
@@ -96,6 +94,7 @@ require 'partials/alert.php';
           </button>
 
         </div>
+        <p class="ml-4">Déjà un compte ? <a href="?page=login">Se connecter</a></p>
       </div>
 
     </div>

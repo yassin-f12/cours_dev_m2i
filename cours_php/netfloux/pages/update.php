@@ -207,14 +207,16 @@ require 'partials/alert.php';
         accept=".jpg,.jpeg,.png">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="trailer">URL de la bande-annonce</label>
+    <div class="form-group">
+      <label for="trailer">Identifiant de la bande-annonce YouTube</label>
       <input
-        type="url"
-        name="trailer"
-        id="trailer"
+        type="text"
         class="form-control"
-        value="<?= htmlspecialchars($formValues['trailer'] ?? '') ?>">
+        id="trailer"
+        name="trailer"
+        maxlength="20"
+        value="<?= htmlspecialchars($formValues['trailer'] ?? '') ?>"
+        placeholder="Ex : 7CWqC3j7Y14">
     </div>
 
     <button type="submit" class="btn btn-success">

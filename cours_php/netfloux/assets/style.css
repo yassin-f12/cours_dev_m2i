@@ -38,3 +38,28 @@ main {
   padding: 7px 10px;
   font-size: 12px;
 }
+
+.movie-placeholder {
+  height: 190px;
+  background-color: #e9ecef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #adb5bd;
+  font-size: 50px;
+}
+
+.movie-placeholder-details {
+  min-height: 350px;
+  height: 100%;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.navbar .nav-link.active {
+  color: #fff;
+  font-weight: bold;
+}

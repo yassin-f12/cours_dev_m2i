@@ -76,10 +76,15 @@ require 'partials/alert.php';
 
       <div class="col-md-5">
         <?php if (!empty($movie['picture'])) { ?>
-          <img src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+          <img
+            src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
             class="card-img h-100"
             style="object-fit: cover;"
             alt="<?= htmlspecialchars($movie['title']) ?>">
+        <?php } else { ?>
+          <div class="movie-placeholder movie-placeholder-details">
+            <i class="fa-solid fa-film"></i>
+          </div>
         <?php } ?>
       </div>
 

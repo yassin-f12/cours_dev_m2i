@@ -106,11 +106,17 @@ require 'partials/alert.php';
 
         <div class="card h-100 position-relative">
 
-          <img
-            src="public/picture/<?= htmlspecialchars($movie['picture'] ?? '') ?>"
-            class="card-img-top"
-            alt="<?= htmlspecialchars($movie['title']) ?>"
-            style="height: 190px; object-fit: cover;">
+          <?php if (!empty($movie['picture'])) { ?>
+            <img
+              src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+              class="card-img-top"
+              alt="<?= htmlspecialchars($movie['title']) ?>"
+              style="height: 190px; object-fit: cover;">
+          <?php } else { ?>
+            <div class="movie-placeholder">
+              <i class="fa-solid fa-film"></i>
+            </div>
+          <?php } ?>
 
           <?php if (isset($_SESSION['user'])) { ?>
             <span class="badge badge-status <?= $movie['is_watched'] ? 'badge-success' : 'badge-warning' ?>">
@@ -128,7 +134,7 @@ require 'partials/alert.php';
               <?= htmlspecialchars($movie['cat_name']) ?>
             </p>
 
-            <p class="card-text">
+            <div class="card-text d-flex justify-content-between align-items-center mb-3">
               <small class="text-muted">
                 <?= htmlspecialchars($movie['movie_year'] ?? 'Année inconnue') ?> -
 
@@ -149,7 +155,19 @@ require 'partials/alert.php';
                 }
                 ?>
               </small>
-            </p>
+
+              <div class="movie-rating">
+                <?php
+                for ($i = 1; $i <= 5; $i++) {
+                  if ($i <= $movie['rank']) {
+                    echo '★';
+                  } else {
+                    echo '☆';
+                  }
+                }
+                ?>
+              </div>
+            </div>
 
             <?php if (isset($_SESSION['user'])) { ?>
               <a

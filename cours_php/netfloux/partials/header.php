@@ -5,7 +5,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
       <a class="navbar-brand" href="index.php">Netfloux</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <?php if (!isset($_SESSION['user'])) { ?>
-                <a class="dropdown-item" <?= $page === 'login' ? 'active' : '' ?> href="?page=login">Connexion</a>
-                <a class="dropdown-item" <?= $page === 'register' ? 'active' : '' ?> href="?page=register">Création de compte</a>
+                <a class="dropdown-item <?= $page === 'login' ? 'active' : '' ?>" href="?page=login">Connexion</a>
+                <a class="dropdown-item <?= $page === 'register' ? 'active' : '' ?>" href="?page=register">Création de compte</a>
               <?php } else { ?>
                 <a class="dropdown-item" href="index.php?logout=true">Déconnexion</a>
               <?php } ?>
@@ -48,8 +48,10 @@
         </ul>
 
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+            Rechercher
+          </button>
         </form>
       </div>
     </nav>

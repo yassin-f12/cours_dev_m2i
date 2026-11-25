@@ -167,14 +167,14 @@ require_once 'partials/alert.php';
   </div>
 
   <div class="form-group">
-    <label for="trailer">Lien de la bande-annonce</label>
+    <label for="trailer">Identifiant de la bande-annonce YouTube</label>
     <input
-      type="url"
+      type="text"
       class="form-control"
       id="trailer"
       name="trailer"
-      maxlength="255"
-      placeholder="https://www.youtube.com/...">
+      maxlength="20"
+      placeholder="Ex : 7CWqC3j7Y14">
   </div>
 
   <button type="submit" class="btn btn-outline-dark px-4">

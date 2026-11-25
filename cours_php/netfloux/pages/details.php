@@ -201,7 +201,7 @@ require 'partials/alert.php';
             <?php if (isset($_SESSION['user'])) { ?>
 
               <a
-                href="?page=update&id=<?= $movie['id'] ?>"
+                href="?page=add&id=<?= $movie['id'] ?>"
                 class="btn btn-warning mr-2 mb-2">
                 <i class="fa-solid fa-pen"></i>
                 Modifier

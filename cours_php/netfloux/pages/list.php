@@ -174,7 +174,7 @@ require 'partials/alert.php';
 
             <?php if (isset($_SESSION['user'])) { ?>
               <a
-                href="?page=update&id=<?= $movie['id'] ?>"
+                href="?page=add&id=<?= $movie['id'] ?>"
                 class="btn btn-light position-absolute"
                 style="top: 10px; right: 10px; z-index: 1;"
                 title="Modifier le film">

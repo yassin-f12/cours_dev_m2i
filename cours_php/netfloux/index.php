@@ -49,10 +49,6 @@ switch ($page) {
     require 'pages/details.php';
     break;
 
-  case 'update':
-    require 'pages/update.php';
-    break;
-
   case 'delete':
     require 'pages/delete.php';
     break;

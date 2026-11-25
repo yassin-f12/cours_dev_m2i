@@ -1,5 +1,8 @@
 <?php
-
+if (!defined('NETFLOUX')) {
+  http_response_code(403);
+  exit('Accès interdit');
+}
 $id = $_GET['id'] ?? null;
 $movie = null;
 $alertError = null;

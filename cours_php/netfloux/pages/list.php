@@ -1,4 +1,8 @@
 <?php
+if (!defined('NETFLOUX')) {
+  http_response_code(403);
+  exit('Accès interdit');
+}
 $movies = [];
 $nbrMovies = 0;
 

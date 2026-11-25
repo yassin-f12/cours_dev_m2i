@@ -3,21 +3,72 @@ if (!defined('NETFLOUX')) {
   http_response_code(403);
   exit('Accès interdit');
 }
+
+$categories = [];
 $movies = [];
 $nbrMovies = 0;
 
+$search = trim($_GET['search'] ?? '');
+$category = $_GET['category'] ?? '';
+$year = $_GET['year'] ?? '';
+$status = $_GET['status'] ?? '';
+$sort = $_GET['sort'] ?? 'title_asc';
+
 try {
-  $request = $db->query("
-        SELECT movie.*, category.cat_name
-        FROM movie
-        INNER JOIN category ON movie.id_category = category.id
-        ORDER BY movie.title ASC
-    ");
+  $categories = $db->query("
+    SELECT * FROM category
+    ORDER BY cat_name ASC
+  ")->fetchAll();
+
+  $request = "
+    SELECT movie.*, category.cat_name
+    FROM movie
+    INNER JOIN category ON movie.id_category = category.id
+    WHERE 1 = 1
+  ";
+
+  $params = [];
+
+  if ($search !== '') {
+    $request = $request . " AND movie.title LIKE ?";
+    $params[] = "%$search%";
+  }
+
+  if (is_numeric($category) && $category > 0) {
+    $request = $request . " AND movie.id_category = ?";
+    $params[] = $category;
+  }
+
+  if (ctype_digit((string) $year) && strlen((string) $year) === 4) {
+    $request = $request . " AND movie.movie_year = ?";
+    $params[] = $year;
+  }
+
+  if (isset($_SESSION['user']) && in_array($status, ['0', '1'], true)) {
+    $request = $request . " AND movie.is_watched = ?";
+    $params[] = $status;
+  }
+
+  $sortOptions = [
+    'title_asc' => 'movie.title ASC',
+    'title_desc' => 'movie.title DESC',
+    'year_desc' => 'movie.movie_year DESC',
+    'year_asc' => 'movie.movie_year ASC',
+    'duration_asc' => 'movie.movie_time ASC',
+    'duration_desc' => 'movie.movie_time DESC'
+  ];
+
+  $orderBy = $sortOptions[$sort] ?? 'movie.title ASC';
+
+  $request = $request . " ORDER BY " . $orderBy;
+
+  $request = $db->prepare($request);
+  $request->execute($params);
 
   $movies = $request->fetchAll();
-  $nbrMovies = count($movies);
 
-  if ($nbrMovies > 0) {
+  if (count($movies) > 0) {
+    $nbrMovies = count($movies);
     $plus = $nbrMovies > 1 ? 's' : '';
     $alertSuccess = "$nbrMovies film$plus trouvé$plus.";
   } else {
@@ -40,7 +91,10 @@ if (isset($_SESSION['alertSuccess'])) {
 require 'partials/alert.php';
 ?>
 
+
 <h1 class="mb-4">Liste des films</h1>
+
+<?php require 'partials/filters.php'; ?>
 
 <?php if ($nbrMovies > 0) { ?>
 
@@ -52,9 +106,10 @@ require 'partials/alert.php';
 
         <div class="card h-100 position-relative">
 
-          <img src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+          <img
+            src="public/picture/<?= htmlspecialchars($movie['picture'] ?? '') ?>"
             class="card-img-top"
-            alt="<?= $movie['title'] ?>"
+            alt="<?= htmlspecialchars($movie['title']) ?>"
             style="height: 190px; object-fit: cover;">
 
           <?php if (isset($_SESSION['user'])) { ?>
@@ -70,15 +125,32 @@ require 'partials/alert.php';
             </h5>
 
             <p class="card-text">
-              <?= $movie['cat_name'] ?>
+              <?= htmlspecialchars($movie['cat_name']) ?>
             </p>
 
             <p class="card-text">
               <small class="text-muted">
-                <?= htmlspecialchars($movie['movie_year']) ?? 'Année inconnue' ?> -
-                <?= !empty(htmlspecialchars($movie['movie_time'])) ? substr(htmlspecialchars($movie['movie_time']), 0, 5) : 'Durée inconnue' ?>
+                <?= htmlspecialchars($movie['movie_year'] ?? 'Année inconnue') ?> -
+
+                <?php
+                if (!empty($movie['movie_time'])) {
+                  $hours = (int) substr($movie['movie_time'], 0, 2);
+                  $minutes = (int) substr($movie['movie_time'], 3, 2);
+
+                  if ($hours > 0 && $minutes > 0) {
+                    echo $hours . 'h' . $minutes;
+                  } elseif ($hours > 0) {
+                    echo $hours . 'h';
+                  } else {
+                    echo $minutes . 'min';
+                  }
+                } else {
+                  echo 'Durée inconnue';
+                }
+                ?>
               </small>
             </p>
+
             <?php if (isset($_SESSION['user'])) { ?>
               <a
                 href="?page=update&id=<?= $movie['id'] ?>"
@@ -88,7 +160,9 @@ require 'partials/alert.php';
                 <i class="fa-solid fa-pen"></i>
               </a>
             <?php } ?>
+
             <div class="d-flex justify-content-between">
+
               <a href="?page=details&id=<?= $movie['id'] ?>" class="btn btn-primary">
                 Voir détails
               </a>
@@ -100,20 +174,23 @@ require 'partials/alert.php';
               <?php } ?>
 
               <?php if (isset($_SESSION['user'])) { ?>
-                <form action="?page=delete" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
+                <form
+                  action="?page=delete"
+                  method="POST"
+                  onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
+
                   <input type="hidden" name="id" value="<?= $movie['id'] ?>">
+
                   <button type="submit" class="btn btn-danger">
                     <i class="fas fa-trash"></i>
                   </button>
                 </form>
               <?php } ?>
+
             </div>
 
-
           </div>
-
         </div>
-
       </div>
 
     <?php } ?>

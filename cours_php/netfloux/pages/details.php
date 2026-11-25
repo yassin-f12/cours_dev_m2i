@@ -85,9 +85,22 @@ require 'partials/alert.php';
 
           <p>
             <strong>Durée :</strong>
-            <?= !empty($movie['movie_time'])
-              ? substr($movie['movie_time'], 0, 5)
-              : 'Non renseignée' ?>
+            <?php
+            if (!empty($movie['movie_time'])) {
+              $hours = (int) substr($movie['movie_time'], 0, 2);
+              $minutes = (int) substr($movie['movie_time'], 3, 2);
+
+              if ($hours > 0 && $minutes > 0) {
+                echo $hours . 'h' . $minutes;
+              } elseif ($hours > 0) {
+                echo $hours . 'h';
+              } else {
+                echo $minutes . 'min';
+              }
+            } else {
+              echo 'Durée inconnue';
+            }
+            ?>
           </p>
 
           <?php if (isset($_SESSION['user'])) { ?>

@@ -186,7 +186,11 @@ require 'partials/alert.php';
               </a>
 
               <?php if (!empty($movie['trailer'])) { ?>
-                <a href="<?= htmlspecialchars($movie['trailer']) ?>" target="_blank" class="btn btn-info">
+                <a
+                  href="https://www.youtube.com/watch?v=<?= htmlspecialchars($movie['trailer']) ?>"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-info">
                   Bande-annonce
                 </a>
               <?php } ?>

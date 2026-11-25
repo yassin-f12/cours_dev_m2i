@@ -189,12 +189,12 @@ require 'partials/alert.php';
 
             <?php if (!empty($movie['trailer'])) { ?>
               <a
-                href="<?= htmlspecialchars($movie['trailer']) ?>"
+                href="https://www.youtube.com/watch?v=<?= htmlspecialchars($movie['trailer']) ?>"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-info mr-2 mb-2">
-                <i class="fa-solid fa-film"></i>
-                Voir la bande-annonce
+                <i class="fa-brands fa-youtube mr-1"></i>
+                Bande-annonce
               </a>
             <?php } ?>
 
@@ -228,7 +228,7 @@ require 'partials/alert.php';
 
           <?php if (!empty($movie['trailer'])) { ?>
             <div class="mt-3 mb-3">
-              <h5>Bande-annonce</h5>
+              <h5>Bande annonce</h5>
 
               <iframe
                 width="100%"

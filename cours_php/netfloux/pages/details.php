@@ -23,6 +23,24 @@ if (!$id || !filter_var($id, FILTER_VALIDATE_INT)) {
 
     if (!$movie) {
       $alertError = "Film introuvable.";
+    } elseif (isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      $isWatched = $_POST['is_watched'] ?? null;
+      $isWatched = filter_var($isWatched, FILTER_VALIDATE_INT);
+
+      if ($isWatched !== false && in_array($isWatched, [0, 1], true)) {
+        $request = $db->prepare("
+                    UPDATE movie
+                    SET is_watched = ?
+                    WHERE id = ?
+                ");
+
+        $request->execute([$isWatched, $id]);
+
+        $movie['is_watched'] = $isWatched;
+        $alertSuccess = "Le statut du film a été modifié.";
+      } else {
+        $alertError = "Statut du film invalide.";
+      }
     }
   } catch (PDOException $e) {
     $alertError = "Impossible de récupérer les informations du film.";
@@ -72,15 +90,27 @@ require 'partials/alert.php';
               : 'Non renseignée' ?>
           </p>
 
-          <p>
-            <strong>Statut :</strong>
-            <?= $movie['is_watched'] ? 'Déjà vu' : 'Pas encore vu' ?>
-          </p>
+          <?php if (isset($_SESSION['user'])) { ?>
+            <form action="?page=details&id=<?= $id ?>" method="POST">
+              <div class="form-group">
+                <label for="is_watched">Statut du film</label>
 
-          <p>
-            <strong>Note :</strong>
-            <?= $movie['rank'] ?>/10
-          </p>
+                <select class="form-control" name="is_watched" id="is_watched">
+                  <option value="0" <?= $movie['is_watched'] == 0 ? 'selected' : '' ?>>
+                    À voir
+                  </option>
+
+                  <option value="1" <?= $movie['is_watched'] == 1 ? 'selected' : '' ?>>
+                    Vu
+                  </option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-outline-dark">
+                Modifier le statut
+              </button>
+            </form>
+          <?php } ?>
 
           <hr>
 

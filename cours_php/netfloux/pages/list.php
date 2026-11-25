@@ -57,6 +57,12 @@ require 'partials/alert.php';
             alt="<?= $movie['title'] ?>"
             style="height: 190px; object-fit: cover;">
 
+          <?php if (isset($_SESSION['user'])) { ?>
+            <span class="badge badge-status <?= $movie['is_watched'] ? 'badge-success' : 'badge-warning' ?>">
+              <?= $movie['is_watched'] ? 'Vu' : 'À voir' ?>
+            </span>
+          <?php } ?>
+
           <div class="card-body">
 
             <h5 class="card-title">

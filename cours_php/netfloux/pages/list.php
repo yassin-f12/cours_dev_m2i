@@ -1,6 +1,4 @@
 <?php
-isset($_SESSION['user']);
-
 $movies = [];
 $nbrMovies = 0;
 

@@ -45,6 +45,32 @@ try {
       throw new Exception("Veuillez remplir le titre et la catégorie.");
     }
 
+    $file = $movie['picture'];
+
+    if (!empty($_FILES['picture']['name'])) {
+
+      $imageFileType = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
+      $targetDir = "public/picture/";
+      $fileName = bin2hex(random_bytes(4)) . "." . $imageFileType;
+      $targetFile = $targetDir . $fileName;
+
+      if ($_FILES['picture']['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception("Une erreur est survenue lors de l'envoi de votre image.");
+      } elseif ($_FILES['picture']['size'] > 500000) {
+        throw new Exception("Le fichier est trop volumineux (max 500ko).");
+      } elseif (!in_array($imageFileType, ['jpg', 'jpeg', 'png'], true)) {
+        throw new Exception("Le fichier n'est pas une image, format accepté : jpg, jpeg, png.");
+      } elseif (getimagesize($_FILES['picture']['tmp_name']) === false) {
+        throw new Exception("Le fichier n'est pas une image.");
+      } elseif (file_exists($targetFile)) {
+        throw new Exception("Un fichier du même nom existe déjà.");
+      } elseif (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile)) {
+        $file = $targetFile;
+      } else {
+        throw new Exception("Une erreur est survenue lors de l'envoi de votre image.");
+      }
+    }
+
     $time = null;
 
     if ($formValues['time'] !== '') {
@@ -54,16 +80,16 @@ try {
     }
 
     $request = $db->prepare("
-            UPDATE movie
-            SET title = ?,
-                summary = ?,
-                movie_year = ?,
-                movie_time = ?,
-                trailer = ?,
-                picture = ?,
-                id_category = ?
-            WHERE id = ?
-        ");
+      UPDATE movie
+      SET title = ?,
+          summary = ?,
+          movie_year = ?,
+          movie_time = ?,
+          trailer = ?,
+          picture = ?,
+          id_category = ?
+      WHERE id = ?
+    ");
 
     $request->execute([
       $formValues['title'],
@@ -71,10 +97,16 @@ try {
       $formValues['year'] ?: null,
       $time,
       $formValues['trailer'] ?: null,
-      $formValues['picture'] ?: null,
+      $file,
       $formValues['id_category'],
       $id
     ]);
+
+    $oldPicture = $movie['picture'];
+
+    if ($file !== $oldPicture && !empty($oldPicture) && file_exists($oldPicture)) {
+      unlink($oldPicture);
+    }
 
     $_SESSION['alertSuccess'] = "Le film a bien été modifié.";
 
@@ -90,11 +122,12 @@ try {
 require 'partials/alert.php';
 ?>
 
+
 <?php if (isset($movie) && $movie) { ?>
 
   <h1 class="mb-4">Modifier un film</h1>
 
-  <form action="?page=update&id=<?= $id ?>" method="POST">
+  <form action="?page=update&id=<?= $id ?>" method="POST" enctype="multipart/form-data">
 
     <div class="form-group mb-3">
       <label for="title">Titre</label>
@@ -150,13 +183,23 @@ require 'partials/alert.php';
     </div>
 
     <div class="form-group mb-3">
-      <label for="picture">URL de l'affiche</label>
+      <label for="picture">Affiche du film</label>
+
+      <?php if (!empty($movie['picture'])) { ?>
+        <div class="mb-2">
+          <img
+            src="<?= htmlspecialchars($movie['picture']) ?>"
+            alt="Affiche actuelle"
+            style="width: 120px; height: 160px; object-fit: cover;">
+        </div>
+      <?php } ?>
+
       <input
-        type="url"
+        type="file"
         name="picture"
         id="picture"
         class="form-control"
-        value="<?= htmlspecialchars($formValues['picture'] ?? '') ?>">
+        accept=".jpg,.jpeg,.png">
     </div>
 
     <div class="form-group mb-3">

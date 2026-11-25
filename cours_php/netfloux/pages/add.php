@@ -6,33 +6,63 @@ if (!isset($_SESSION['user'])) {
 
 if (isset($_POST['title'])) {
   $title = $_POST['title'];
-  $summary = $_POST['summary'];
-  $year = $_POST['year'];
+  $summary = $_POST['summary'] ?: null;
+  $year = $_POST['year'] ?: null;
   $time = $_POST['time'];
-  $trailer = $_POST['trailer'];
-  $picture = $_POST['picture'];
+  $trailer = $_POST['trailer'] ?: null;
   $category = $_POST['category'];
 
-  if (empty($title) || empty($summary) || empty($year) || empty($time) || empty($picture) || empty($trailer) || empty($category)) {
+  if (empty($title) || empty($category)) {
     $alertError = "Veuillez remplir tous les champs du formulaire";
   } else {
+
     // Conversion des minutes en format TIME pour MySQL (pour le champ durée du film)
-    $hours = intdiv($time, 60);
-    $minutes = $time % 60;
-    $time = sprintf('%02d:%02d:00', $hours, $minutes);
+    if ($_POST['time'] !== '') {
+      $hours = intdiv((int)$_POST['time'], 60);
+      $minutes = (int)$_POST['time'] % 60;
+      $time = sprintf('%02d:%02d:00', $hours, $minutes);
+    } else {
+      $time = null;
+    }
 
     try {
-      $request = $db->prepare('INSERT INTO movie (title, summary, movie_year, movie_time, trailer, picture, id_category) VALUES (?, ?, ?, ?, ?, ?, ?)');
-      $request->execute([
-        $title,
-        $summary,
-        $year,
-        $time,
-        $trailer,
-        $picture,
-        $category
-      ]);
-      $alertSuccess = "Votre film $title a bien été ajouté !";
+      $file = null;
+      if (!empty($_FILES['picture']['name'])) {
+        $imageFileType = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
+        $targetDir = "public/picture/";
+        $fileName = bin2hex(random_bytes(4)) . "." . $imageFileType;
+        $targetFile = $targetDir . $fileName;
+
+        if ($_FILES['picture']['error'] !== UPLOAD_ERR_OK) {
+          $alertError = "Une erreur est survenue lors de l'envoi de votre image.";
+        } elseif ($_FILES['picture']['size'] > 500000) {
+          $alertError = "Le fichier est trop volumineux (max 500ko).";
+        } elseif (!in_array($imageFileType, ['jpg', 'jpeg', 'png'], true)) {
+          $alertError = "Le fichier n'est pas une image, format accepté : jpg, jpeg, png.";
+        } elseif (getimagesize($_FILES['picture']['tmp_name']) === false) {
+          $alertError = "Le fichier n'est pas une image.";
+        } elseif (file_exists($targetFile)) {
+          $alertError = "Un fichier du même nom existe déjà.";
+        } elseif (move_uploaded_file($_FILES["picture"]["tmp_name"], $targetFile)) {
+          $file = $targetFile;
+        } else {
+          $alertError = "Une erreur est survenue lors de l'envoi de votre image.";
+        }
+      }
+
+      if (!$alertError) {
+        $request = $db->prepare('INSERT INTO movie (title, summary, movie_year, movie_time, trailer, picture, id_category) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $request->execute([
+          $title,
+          $summary,
+          $year,
+          $time,
+          $trailer,
+          $file,
+          $category
+        ]);
+        $alertSuccess = "Votre film $title a bien été ajouté !";
+      }
     } catch (PDOException $e) {
       echo 'Erreur :' . $e->getMessage();
       $alertError = "Une erreur est survenue lors de l'ajout de votre film.";
@@ -54,7 +84,7 @@ require_once 'partials/alert.php';
 
 <h1>Ajouter un film</h1>
 
-<form class="form-film" action="" method="post">
+<form class="form-film" action="" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="title">Titre du film *</label>
     <input
@@ -122,12 +152,11 @@ require_once 'partials/alert.php';
   <div class="form-group">
     <label for="picture">Affiche du film</label>
     <input
-      type="text"
+      type="file"
       class="form-control"
       id="picture"
       name="picture"
-      maxlength="80"
-      placeholder="Nom ou chemin de l'image">
+      accept=".jpg,.jpeg,.png">
   </div>
 
   <div class="form-group">

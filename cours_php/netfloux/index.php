@@ -1,5 +1,15 @@
 
 <?php
+session_start();
+
+if (isset($_GET['logout'])) {
+  $_SESSION = [];
+  session_destroy();
+
+  header('Location: ?page=home');
+  exit;
+}
+
 require_once 'bdd.php';
 require_once 'partials/head.php';
 

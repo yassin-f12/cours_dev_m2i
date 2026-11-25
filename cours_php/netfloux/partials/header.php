@@ -32,12 +32,19 @@
               Compte
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Connexion</a>
-              <a class="dropdown-item" <?= $page === 'register' ? 'active' : '' ?> href="?page=register">Création de compte</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Déconnexion</a>
+              <?php if (!isset($_SESSION['user'])) { ?>
+                <a class="dropdown-item" <?= $page === 'login' ? 'active' : '' ?> href="?page=login">Connexion</a>
+                <a class="dropdown-item" <?= $page === 'register' ? 'active' : '' ?> href="?page=register">Création de compte</a>
+              <?php } else { ?>
+                <a class="dropdown-item" href="index.php?logout=true">Déconnexion</a>
+              <?php } ?>
             </div>
           </li>
+          <?php if (isset($_SESSION['user'])) { ?>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#"><?= $_SESSION['user']['pseudo'] ?></a>
+            </li>
+          <?php } ?>
         </ul>
 
         <form class="form-inline my-2 my-lg-0">

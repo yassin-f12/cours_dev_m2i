@@ -21,6 +21,11 @@ if ($page === 'category') {
   }
 }
 
+if ($page === 'delete') {
+  require 'pages/delete.php';
+  exit;
+}
+
 require_once 'partials/head.php';
 require_once 'partials/header.php';
 
@@ -46,10 +51,6 @@ switch ($page) {
 
   case 'details':
     require 'pages/details.php';
-    break;
-
-  case 'delete':
-    require 'pages/delete.php';
     break;
 
   case 'register':

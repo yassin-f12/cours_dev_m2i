@@ -1,8 +1,4 @@
 <?php
-if (!defined('NETFLOUX')) {
-  http_response_code(403);
-  exit('Accès interdit');
-}
 ?>
 <div class="text-center py-5">
   <h1 class="display-4 font-weight-bold">Bienvenue sur Netfloux !</h1>

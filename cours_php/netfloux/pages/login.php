@@ -1,8 +1,4 @@
 <?php
-if (!defined('NETFLOUX')) {
-  http_response_code(403);
-  exit('Accès interdit');
-}
 if (isset($_POST['email'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];

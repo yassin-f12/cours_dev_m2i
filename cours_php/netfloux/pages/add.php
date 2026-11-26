@@ -1,8 +1,4 @@
 <?php
-if (!defined('NETFLOUX')) {
-  http_response_code(403);
-  exit('Accès interdit');
-}
 if (!isset($_SESSION['user'])) {
   header('Location: ?page=login');
   exit;
@@ -135,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $alertSuccess = "Votre film $title a bien été ajouté !";
+
+        header('Location: ?page=list');
+        exit;
       }
     } catch (PDOException $e) {
 

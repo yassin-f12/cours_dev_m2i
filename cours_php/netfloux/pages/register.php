@@ -1,8 +1,4 @@
 <?php
-if (!defined('NETFLOUX')) {
-  http_response_code(403);
-  exit('Accès interdit');
-}
 const PASSWORD_MIN_LENGTH = 8;
 
 if (isset($_POST["pseudo"])) {

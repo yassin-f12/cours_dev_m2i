@@ -1,7 +1,6 @@
 
 <?php
 session_start();
-define('NETFLOUX', true);
 
 if (isset($_GET['logout'])) {
   $_SESSION = [];

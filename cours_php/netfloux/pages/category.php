@@ -73,25 +73,38 @@ if (isset($_POST['update'])) {
       $request = $db->prepare("
         SELECT id
         FROM category
-        WHERE cat_name = ? AND id != ?
+        WHERE id = ?
       ");
 
-      $request->execute([$catName, $id]);
-      $categoryExists = $request->fetch();
+      $request->execute([$id]);
+      $categoryToUpdate = $request->fetch();
 
-      if ($categoryExists) {
-        $alertError = "Ce nom de catégorie est déjà utilisé.";
+      if (!$categoryToUpdate) {
+        $alertError = "La catégorie à modifier est introuvable.";
       } else {
         $request = $db->prepare("
-          UPDATE category
-          SET cat_name = ?
-          WHERE id = ?
+          SELECT id
+          FROM category
+          WHERE cat_name = ? AND id != ?
         ");
 
         $request->execute([$catName, $id]);
+        $categoryExists = $request->fetch();
 
-        header('Location: ?page=category&updated=1');
-        exit;
+        if ($categoryExists) {
+          $alertError = "Ce nom de catégorie est déjà utilisé.";
+        } else {
+          $request = $db->prepare("
+            UPDATE category
+            SET cat_name = ?
+            WHERE id = ?
+          ");
+
+          $request->execute([$catName, $id]);
+
+          header('Location: ?page=category&updated=1');
+          exit;
+        }
       }
     } catch (PDOException $e) {
       $alertError = "Impossible de modifier la catégorie.";
@@ -105,14 +118,27 @@ if (isset($_POST['archive'])) {
   if ($id !== false && $id > 0) {
     try {
       $request = $db->prepare("
-        UPDATE category
-        SET category_is_archived = 1
+        SELECT id
+        FROM category
         WHERE id = ?
       ");
 
       $request->execute([$id]);
+      $categoryExists = $request->fetch();
 
-      $alertSuccess = "La catégorie a bien été archivée.";
+      if (!$categoryExists) {
+        $alertError = "La catégorie à archiver est introuvable.";
+      } else {
+        $request = $db->prepare("
+          UPDATE category
+          SET category_is_archived = 1
+          WHERE id = ?
+        ");
+
+        $request->execute([$id]);
+
+        $alertSuccess = "La catégorie a bien été archivée.";
+      }
     } catch (PDOException $e) {
       $alertError = "Impossible d'archiver la catégorie.";
     }
@@ -127,14 +153,27 @@ if (isset($_POST['unarchive'])) {
   if ($id !== false && $id > 0) {
     try {
       $request = $db->prepare("
-        UPDATE category
-        SET category_is_archived = 0
+        SELECT id
+        FROM category
         WHERE id = ?
       ");
 
       $request->execute([$id]);
+      $categoryExists = $request->fetch();
 
-      $alertSuccess = "La catégorie a bien été désarchivée.";
+      if (!$categoryExists) {
+        $alertError = "La catégorie à désarchiver est introuvable.";
+      } else {
+        $request = $db->prepare("
+          UPDATE category
+          SET category_is_archived = 0
+          WHERE id = ?
+        ");
+
+        $request->execute([$id]);
+
+        $alertSuccess = "La catégorie a bien été désarchivée.";
+      }
     } catch (PDOException $e) {
       $alertError = "Impossible de désarchiver la catégorie.";
     }

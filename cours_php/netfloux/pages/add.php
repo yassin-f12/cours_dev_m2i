@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newFile = null;
 
     try {
-
       if (!empty($_FILES['picture']['name'])) {
 
         $imageFileType = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
@@ -51,96 +50,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $targetFile = $targetDir . $fileName;
 
         if ($_FILES['picture']['error'] !== UPLOAD_ERR_OK) {
-          throw new Exception("Une erreur est survenue lors de l'envoi de votre image.");
+          $alertError = "Une erreur est survenue lors de l'envoi de votre image.";
         } elseif ($_FILES['picture']['size'] > 500000) {
-          throw new Exception("Le fichier est trop volumineux (max 500ko).");
+          $alertError = "Le fichier est trop volumineux (max 500ko).";
         } elseif (!in_array($imageFileType, ['jpg', 'jpeg', 'png'], true)) {
-          throw new Exception("Format accepté : jpg, jpeg, png.");
+          $alertError = "Format accepté : jpg, jpeg, png.";
         } elseif (getimagesize($_FILES['picture']['tmp_name']) === false) {
-          throw new Exception("Le fichier n'est pas une image.");
+          $alertError = "Le fichier n'est pas une image.";
         } elseif (file_exists($targetFile)) {
-          throw new Exception("Un fichier du même nom existe déjà.");
+          $alertError = "Un fichier du même nom existe déjà.";
         } elseif (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile)) {
           $file = $fileName;
           $newFile = $fileName;
         } else {
-          throw new Exception("Une erreur est survenue lors de l'envoi de votre image.");
+          $alertError = "Une erreur est survenue lors de l'envoi de votre image.";
         }
       } elseif ($isEdit && isset($_POST['delete_picture'])) {
-
         $file = null;
       }
 
-      if ($isEdit) {
+      if (empty($alertError)) {
+        if ($isEdit) {
+          $request = $db->prepare("
+            UPDATE movie
+            SET title = ?,
+                summary = ?,
+                movie_year = ?,
+                movie_time = ?,
+                trailer = ?,
+                picture = ?,
+                id_category = ?
+            WHERE id = ?
+          ");
 
-        $request = $db->prepare("
-          UPDATE movie
-          SET title = ?,
-              summary = ?,
-              movie_year = ?,
-              movie_time = ?,
-              trailer = ?,
-              picture = ?,
-              id_category = ?
-          WHERE id = ?
-        ");
+          $request->execute([
+            $title,
+            $summary,
+            $year,
+            $time,
+            $trailer,
+            $file,
+            $category,
+            $id
+          ]);
 
-        $request->execute([
-          $title,
-          $summary,
-          $year,
-          $time,
-          $trailer,
-          $file,
-          $category,
-          $id
-        ]);
+          $oldPicture = $movie['picture'];
 
-        $oldPicture = $movie['picture'];
+          if ($file !== $oldPicture && !empty($oldPicture)) {
+            $oldFile = "public/picture/" . $oldPicture;
 
-        if ($file !== $oldPicture && !empty($oldPicture)) {
-          $oldFile = "public/picture/" . $oldPicture;
-
-          if (file_exists($oldFile)) {
-            unlink($oldFile);
+            if (file_exists($oldFile)) {
+              unlink($oldFile);
+            }
           }
+
+          header('Location: ?page=details&id=' . $id);
+          exit;
+        } else {
+          $request = $db->prepare("
+            INSERT INTO movie
+            (title, summary, movie_year, movie_time, trailer, picture, id_category)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+          ");
+
+          $request->execute([
+            $title,
+            $summary,
+            $year,
+            $time,
+            $trailer,
+            $file,
+            $category
+          ]);
+
+          $_SESSION['alertSuccess'] = "Votre film $title a bien été ajouté !";
+
+          header('Location: ?page=list');
+          exit;
         }
-
-        header('Location: ?page=details&id=' . $id);
-        exit;
-      } else {
-
-        $request = $db->prepare("
-          INSERT INTO movie
-          (title, summary, movie_year, movie_time, trailer, picture, id_category)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
-        ");
-
-        $request->execute([
-          $title,
-          $summary,
-          $year,
-          $time,
-          $trailer,
-          $file,
-          $category
-        ]);
-
-        $alertSuccess = "Votre film $title a bien été ajouté !";
-
-        header('Location: ?page=list');
-        exit;
       }
     } catch (PDOException $e) {
-
       if ($newFile && file_exists("public/picture/" . $newFile)) {
         unlink("public/picture/" . $newFile);
       }
-
       $alertError = "Une erreur est survenue lors de l'enregistrement du film.";
-    } catch (Exception $e) {
-
-      $alertError = $e->getMessage();
     }
   }
 }
@@ -149,25 +142,24 @@ $categories = [];
 try {
   if ($isEdit) {
     $request = $db->prepare("
-    SELECT *
-    FROM category
-    WHERE category_is_archived = 0 OR id = ?
-    ORDER BY cat_name ASC
-  ");
+      SELECT *
+      FROM category
+      WHERE category_is_archived = 0 OR id = ?
+      ORDER BY cat_name ASC
+    ");
 
     $request->execute([$movie['id_category']]);
   } else {
     $request = $db->query("
-    SELECT *
-    FROM category
-    WHERE category_is_archived = 0
-    ORDER BY cat_name ASC
-  ");
+      SELECT *
+      FROM category
+      WHERE category_is_archived = 0
+      ORDER BY cat_name ASC
+    ");
   }
 
   $categories = $request->fetchAll();
 } catch (PDOException $e) {
-  echo 'Erreur :' . $e->getMessage();
   $alertError = "Impossible de récupérer les categories pour le moment.";
 }
 

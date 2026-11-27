@@ -33,16 +33,11 @@ require 'partials/alert.php';
 ?>
 
 <form action="?page=login" method="post">
-
-
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
-
       <div class="card shadow-sm mt-4">
         <div class="card-body p-4">
-
           <h1 class="h3 text-center mb-4">Se connecter</h1>
-
           <div class="form-group mb-3">
             <label for="email">Adresse mail</label>
             <input
@@ -53,7 +48,6 @@ require 'partials/alert.php';
               placeholder="exemple@mail.com"
               required>
           </div>
-
           <div class="form-group mb-4">
             <label for="password">Mot de passe</label>
 
@@ -80,13 +74,9 @@ require 'partials/alert.php';
           <button type="submit" class="btn btn-primary btn-block">
             Se connecter
           </button>
-
         </div>
         <p class="ml-4">Nouveau ? <a href="?page=register">Créer mon compte</a></p>
       </div>
-
     </div>
   </div>
-
-
 </form>

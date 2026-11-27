@@ -11,12 +11,14 @@ $sort = $_GET['sort'] ?? 'title_asc';
 
 try {
 
-  $categories = $db->query("
-  SELECT *
-  FROM category
-  WHERE category_is_archived = 0
-  ORDER BY cat_name ASC
-")->fetchAll();
+  $request = $db->query("
+    SELECT *
+    FROM category
+    WHERE category_is_archived = 0
+    ORDER BY cat_name ASC
+  ");
+
+  $categories = $request->fetchAll();
 
   $request = "
     SELECT movie.*, category.cat_name
@@ -89,27 +91,27 @@ if (isset($_SESSION['alertSuccess'])) {
 require 'partials/alert.php';
 ?>
 
-
 <h1 class="mb-4">Liste des films</h1>
 
 <?php require 'partials/filters.php'; ?>
 
 <?php if ($nbrMovies > 0) { ?>
-
   <div class="row">
-
     <?php foreach ($movies as $movie) { ?>
-
       <div class="col-md-4 mb-4">
-
         <div class="card h-100 position-relative">
-
           <?php if (!empty($movie['picture'])) { ?>
-            <img
-              src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
-              class="card-img-top"
-              alt="<?= htmlspecialchars($movie['title']) ?>"
-              style="height: 190px; object-fit: cover;">
+            <div class="movie-image">
+              <img
+                src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+                class="movie-image-background"
+                alt=""
+                aria-hidden="true">
+              <img
+                src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+                class="movie-image-poster"
+                alt="<?= htmlspecialchars($movie['title']) ?>">
+            </div>
           <?php } else { ?>
             <div class="movie-placeholder">
               <i class="fa-solid fa-film"></i>
@@ -123,19 +125,15 @@ require 'partials/alert.php';
           <?php } ?>
 
           <div class="card-body">
-
             <h5 class="card-title">
               <?= htmlspecialchars($movie['title']) ?>
             </h5>
-
             <p class="card-text">
               <?= htmlspecialchars($movie['cat_name']) ?>
             </p>
-
             <div class="card-text d-flex justify-content-between align-items-center mb-3">
               <small class="text-muted">
                 <?= htmlspecialchars($movie['movie_year'] ?? 'Année inconnue') ?> -
-
                 <?php
                 if (!empty($movie['movie_time'])) {
                   $hours = (int) substr($movie['movie_time'], 0, 2);
@@ -178,11 +176,9 @@ require 'partials/alert.php';
             <?php } ?>
 
             <div class="d-flex justify-content-between">
-
               <a href="?page=details&id=<?= $movie['id'] ?>" class="btn btn-primary">
                 Voir détails
               </a>
-
               <?php if (!empty($movie['trailer'])) { ?>
                 <a
                   href="https://www.youtube.com/watch?v=<?= htmlspecialchars($movie['trailer']) ?>"
@@ -198,23 +194,16 @@ require 'partials/alert.php';
                   action="?page=delete"
                   method="POST"
                   onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
-
                   <input type="hidden" name="id" value="<?= $movie['id'] ?>">
-
                   <button type="submit" class="btn btn-danger">
                     <i class="fas fa-trash"></i>
                   </button>
                 </form>
               <?php } ?>
-
             </div>
-
           </div>
         </div>
       </div>
-
     <?php } ?>
-
   </div>
-
 <?php } ?>

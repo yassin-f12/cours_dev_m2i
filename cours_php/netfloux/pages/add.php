@@ -71,10 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file = null;
       }
 
-      if ($time !== null) {
-        $time .= ':00';
-      }
-
       if ($isEdit) {
 
         $request = $db->prepare("

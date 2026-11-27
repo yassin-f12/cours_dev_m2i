@@ -68,14 +68,19 @@ require 'partials/alert.php';
 
   <div class="card shadow-sm mt-4">
     <div class="row no-gutters">
-
       <div class="col-md-5">
         <?php if (!empty($movie['picture'])) { ?>
-          <img
-            src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
-            class="card-img h-100"
-            style="object-fit: cover;"
-            alt="<?= htmlspecialchars($movie['title']) ?>">
+          <div class="movie-details-image">
+            <img
+              src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+              class="movie-details-background"
+              alt=""
+              aria-hidden="true">
+            <img
+              src="public/picture/<?= htmlspecialchars($movie['picture']) ?>"
+              class="movie-details-poster"
+              alt="<?= htmlspecialchars($movie['title']) ?>">
+          </div>
         <?php } else { ?>
           <div class="movie-placeholder movie-placeholder-details">
             <i class="fa-solid fa-film"></i>
@@ -85,22 +90,17 @@ require 'partials/alert.php';
 
       <div class="col-md-7">
         <div class="card-body">
-
           <h1 class="card-title">
             <?= htmlspecialchars($movie['title']) ?>
           </h1>
-
           <p class="text-muted">
             <?= htmlspecialchars($movie['cat_name']) ?>
           </p>
-
           <hr>
-
           <p>
             <strong>Année :</strong>
             <?= $movie['movie_year'] ?: 'Non renseignée' ?>
           </p>
-
           <p>
             <strong>Durée :</strong>
             <?php
@@ -120,14 +120,10 @@ require 'partials/alert.php';
             }
             ?>
           </p>
-
           <?php if (isset($_SESSION['user'])) { ?>
-
             <form action="" method="POST" class="mb-3">
-
               <div class="form-group">
                 <label for="rank">Note du film</label>
-
                 <select name="rank" id="rank" class="form-control">
                   <?php for ($i = 1; $i <= 5; $i++) { ?>
                     <option value="<?= $i ?>" <?= $movie['rank'] == $i ? 'selected' : '' ?>>
@@ -136,40 +132,25 @@ require 'partials/alert.php';
                   <?php } ?>
                 </select>
               </div>
-
               <button type="submit" name="save_rank" class="btn btn-outline-dark">
                 Enregistrer la note
               </button>
-
             </form>
-
           <?php } ?>
 
-
-
           <?php if (isset($_SESSION['user'])) { ?>
-
             <form action="" method="POST" class="mb-3">
-
               <?php if ($movie['is_watched'] == 0) { ?>
-
                 <button type="submit" name="toggle_watched" class="btn btn-success">
                   Marquer comme vu
                 </button>
-
               <?php } else { ?>
-
                 <button type="submit" name="toggle_watched" class="btn btn-warning">
                   Marquer comme non vu
                 </button>
-
               <?php } ?>
-
             </form>
-
           <?php } ?>
-
-
           <hr>
 
           <h5>Synopsis</h5>
@@ -181,7 +162,6 @@ require 'partials/alert.php';
           </p>
 
           <div class="d-flex align-items-center flex-wrap">
-
             <?php if (!empty($movie['trailer'])) { ?>
               <a
                 href="https://www.youtube.com/watch?v=<?= htmlspecialchars($movie['trailer']) ?>"
@@ -194,7 +174,6 @@ require 'partials/alert.php';
             <?php } ?>
 
             <?php if (isset($_SESSION['user'])) { ?>
-
               <a
                 href="?page=add&id=<?= $movie['id'] ?>"
                 class="btn btn-warning mr-2 mb-2">
@@ -204,9 +183,7 @@ require 'partials/alert.php';
 
               <form action="?page=delete" method="POST" class="mr-2 mb-2"
                 onsubmit="return confirm('Voulez-vous vraiment supprimer ce film ?')">
-
                 <input type="hidden" name="id" value="<?= $movie['id'] ?>">
-
                 <button type="submit" class="btn btn-danger">
                   <i class="fa-solid fa-trash"></i>
                   Supprimer
@@ -214,17 +191,14 @@ require 'partials/alert.php';
               </form>
 
             <?php } ?>
-
             <a href="?page=list" class="btn btn-secondary mb-2">
               Retour à la liste
             </a>
-
           </div>
 
           <?php if (!empty($movie['trailer'])) { ?>
             <div class="mt-3 mb-3">
               <h5>Bande annonce</h5>
-
               <iframe
                 width="100%"
                 height="315"
@@ -235,11 +209,8 @@ require 'partials/alert.php';
               </iframe>
             </div>
           <?php } ?>
-
         </div>
       </div>
-
     </div>
   </div>
-
 <?php } ?>

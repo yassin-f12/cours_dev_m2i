@@ -1,8 +1,6 @@
 <form action="" method="GET" class="mb-4">
   <input type="hidden" name="page" value="list">
-
   <div class="form-row align-items-end">
-
     <div class="col-md-4 mb-2">
       <label for="search">Rechercher</label>
       <input
@@ -18,7 +16,6 @@
       <label for="category">Catégorie</label>
       <select name="category" id="category" class="form-control">
         <option value="">Toutes</option>
-
         <?php foreach ($categories as $category) { ?>
           <option
             value="<?= $category['id'] ?>"
@@ -26,7 +23,6 @@
             <?= htmlspecialchars($category['cat_name']) ?>
           </option>
         <?php } ?>
-
       </select>
     </div>
 
@@ -69,12 +65,10 @@
         <a href="?page=list" class="btn btn-outline-secondary mr-2">
           Réinitialiser
         </a>
-
         <button type="submit" class="btn btn-primary">
           Filtrer
         </button>
       </div>
     </div>
   </div>
-
 </form>

@@ -47,16 +47,11 @@ require 'partials/alert.php';
 ?>
 
 <form action="?page=register" method="post">
-
-
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
-
       <div class="card shadow-sm mt-4">
         <div class="card-body p-4">
-
           <h1 class="h3 text-center mb-4">Créer un compte</h1>
-
           <div class="form-group mb-3">
             <label for="pseudo">Pseudo</label>
             <input
@@ -89,17 +84,12 @@ require 'partials/alert.php';
               placeholder="Votre mot de passe"
               required>
           </div>
-
           <button type="submit" class="btn btn-primary btn-block">
             Créer mon compte
           </button>
-
         </div>
         <p class="ml-4">Déjà un compte ? <a href="?page=login">Se connecter</a></p>
       </div>
-
     </div>
   </div>
-
-
 </form>

@@ -17,11 +17,6 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
     if ($movie) {
 
       $picture = $movie['picture'];
-      $path = 'public/picture/' . $picture;
-
-      if ($picture && file_exists($path)) {
-        unlink($path);
-      }
 
       $request = $db->prepare("
         DELETE FROM movie WHERE id = ?
@@ -29,7 +24,18 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
 
       $request->execute([$_POST['id']]);
 
-      $_SESSION['alertSuccess'] = "Le film a bien été supprimé.";
+      if ($request->rowCount() > 0) {
+
+        $path = 'public/picture/' . $picture;
+
+        if ($picture && file_exists($path)) {
+          unlink($path);
+        }
+
+        $_SESSION['alertSuccess'] = "Le film a bien été supprimé.";
+      } else {
+        $_SESSION['alertError'] = "Impossible de supprimer ce film.";
+      }
     } else {
       $_SESSION['alertError'] = "Aucun film correspondant n'a été trouvé.";
     }

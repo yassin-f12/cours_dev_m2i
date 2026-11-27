@@ -120,11 +120,19 @@ require 'partials/alert.php';
             }
             ?>
           </p>
+          <p>
+            <strong>Note :</strong>
+            <?= $movie['rank'] == 0 ? 'Non noté' : $movie['rank'] . ' / 5' ?>
+          </p>
           <?php if (isset($_SESSION['user'])) { ?>
             <form action="" method="POST" class="mb-3">
               <div class="form-group">
                 <label for="rank">Note du film</label>
                 <select name="rank" id="rank" class="form-control">
+                  <?php if ($movie['rank'] == 0) { ?>
+                    <option value="" selected disabled>Non noté</option>
+                  <?php } ?>
+
                   <?php for ($i = 1; $i <= 5; $i++) { ?>
                     <option value="<?= $i ?>" <?= $movie['rank'] == $i ? 'selected' : '' ?>>
                       <?= $i ?> / 5

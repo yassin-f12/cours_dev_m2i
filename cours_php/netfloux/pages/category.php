@@ -2,6 +2,10 @@
 $categoryToEdit = null;
 $clearInput = false;
 
+if (isset($_GET['updated'])) {
+  $alertSuccess = "La catégorie a bien été modifiée.";
+}
+
 if (isset($_GET['edit'])) {
   $id = filter_var($_GET['edit'], FILTER_VALIDATE_INT);
 
@@ -86,9 +90,8 @@ if (isset($_POST['update'])) {
 
         $request->execute([$catName, $id]);
 
-        $categoryToEdit = null;
-        $clearInput = true;
-        $alertSuccess = "La catégorie a bien été modifiée.";
+        header('Location: ?page=category&updated=1');
+        exit;
       }
     } catch (PDOException $e) {
       $alertError = "Impossible de modifier la catégorie.";
@@ -182,7 +185,7 @@ require 'partials/alert.php';
         id="cat_name"
         class="form-control"
         placeholder="Ex : Animation"
-        maxlength="80"
+        maxlength="30"
         value="<?= htmlspecialchars($clearInput ? '' : ($categoryToEdit['cat_name'] ?? $_POST['cat_name'] ?? '')) ?>"
         required>
     </div>

@@ -13,14 +13,18 @@ if (isset($_GET['id'])) {
   if ($id === false || $id === null || $id <= 0) {
     $alertError = "Identifiant de film invalide.";
   } else {
-    $request = $db->prepare("SELECT * FROM movie WHERE id = ?");
-    $request->execute([$id]);
-    $movie = $request->fetch();
+    try {
+      $request = $db->prepare("SELECT * FROM movie WHERE id = ?");
+      $request->execute([$id]);
+      $movie = $request->fetch();
 
-    if (!$movie) {
-      $alertError = "Film introuvable.";
-    } else {
-      $isEdit = true;
+      if (!$movie) {
+        $alertError = "Film introuvable.";
+      } else {
+        $isEdit = true;
+      }
+    } catch (PDOException $e) {
+      $alertError = "Impossible de récupérer le film à modifier.";
     }
   }
 }
@@ -72,6 +76,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (empty($alertError)) {
         if ($isEdit) {
           $request = $db->prepare("
+            SELECT id FROM movie WHERE id = ?
+          ");
+
+          $request->execute([$id]);
+          $existingMovie = $request->fetch();
+
+          if (!$existingMovie) {
+            $alertError = "Le film à modifier est introuvable.";
+
+            if ($newFile && file_exists("public/picture/" . $newFile)) {
+              unlink("public/picture/" . $newFile);
+            }
+          } else {
+            $request = $db->prepare("
             UPDATE movie
             SET title = ?,
                 summary = ?,
@@ -83,29 +101,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             WHERE id = ?
           ");
 
-          $request->execute([
-            $title,
-            $summary,
-            $year,
-            $time,
-            $trailer,
-            $file,
-            $category,
-            $id
-          ]);
+            $request->execute([
+              $title,
+              $summary,
+              $year,
+              $time,
+              $trailer,
+              $file,
+              $category,
+              $id
+            ]);
 
-          $oldPicture = $movie['picture'];
+            $oldPicture = $movie['picture'];
 
-          if ($file !== $oldPicture && !empty($oldPicture)) {
-            $oldFile = "public/picture/" . $oldPicture;
+            if ($file !== $oldPicture && !empty($oldPicture)) {
+              $oldFile = "public/picture/" . $oldPicture;
 
-            if (file_exists($oldFile)) {
-              unlink($oldFile);
+              if (file_exists($oldFile)) {
+                unlink($oldFile);
+              }
             }
-          }
 
-          header('Location: ?page=details&id=' . $id);
-          exit;
+            header('Location: ?page=details&id=' . $id);
+            exit;
+          }
         } else {
           $request = $db->prepare("
             INSERT INTO movie
@@ -279,7 +298,7 @@ require_once 'partials/alert.php';
       class="form-control"
       id="trailer"
       name="trailer"
-      maxlength="20"
+      maxlength="30"
       placeholder="Ex : 7CWqC3j7Y14"
       value="<?= htmlspecialchars($movie['trailer'] ?? '') ?>">
   </div>

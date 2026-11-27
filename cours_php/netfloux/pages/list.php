@@ -153,15 +153,19 @@ require 'partials/alert.php';
               </small>
 
               <div class="movie-rating">
-                <?php
-                for ($i = 1; $i <= 5; $i++) {
-                  if ($i <= $movie['rank']) {
-                    echo '★';
-                  } else {
-                    echo '☆';
+                <?php if ($movie['rank'] == 0) { ?>
+                  <small class="text-muted">Non noté</small>
+                <?php } else { ?>
+                  <?php
+                  for ($i = 1; $i <= 5; $i++) {
+                    if ($i <= $movie['rank']) {
+                      echo '★';
+                    } else {
+                      echo '☆';
+                    }
                   }
-                }
-                ?>
+                  ?>
+                <?php } ?>
               </div>
             </div>
 
